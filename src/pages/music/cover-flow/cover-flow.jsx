@@ -50,7 +50,7 @@ const CoverFlow = () => {
   return (
     <Fragment>
       <Screen
-        currentScreen="cover flow"
+        currentScreen="Cover Flow"
         itemSelected={itemSelected}
         currentSelectedIndex={currentItemSelectedIndex}
       >

@@ -18,7 +18,7 @@ const InformationBar = ({ currentScreen, dark_line = false }) => {
           ["dark-line"]: dark_line,
         }
       )}>
-      <span className="text-black text-[10px] font-bold m-0 capitalize">
+      <span className="text-black text-[10px] font-bold m-0">
         {
           currentScreen ? (
             currentScreen
