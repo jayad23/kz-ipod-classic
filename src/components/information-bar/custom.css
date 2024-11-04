@@ -2,3 +2,8 @@
   padding: 8px 5px 9px 5px;
   background: linear-gradient(to bottom, #ffffff, #d6d5d5, #d7d6d6, #767575af);
 }
+
+.dark-line {
+  padding: 8px 5px 9px 5px;
+  background: linear-gradient(to bottom, #ffffff, #d6d5d5, #d7d6d6, #bebdbdfd);
+}

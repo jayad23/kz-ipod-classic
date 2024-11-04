@@ -7,11 +7,17 @@ import { BxPlay } from "./bxplay.information.icon";
 import { Battery } from "../../assets/icons/battery";
 import { PlayerContext } from "../../contexts/player";
 
-const InformationBar = ({ currentScreen }) => {
+const InformationBar = ({ currentScreen, dark_line = false }) => {
   const { statePlay } = useContext(PlayerContext);
 
   return (
-    <div className={classnames("w-full h-2 flex items-center justify-between absolute top-0 left-0", "steel-bar")}>
+    <div
+      className={classnames("w-full h-2 flex items-center justify-between absolute top-0 left-0",
+        {
+          ["steel-bar"]: !dark_line,
+          ["dark-line"]: dark_line,
+        }
+      )}>
       <span className="text-black text-[10px] font-bold m-0 capitalize">
         {
           currentScreen ? (

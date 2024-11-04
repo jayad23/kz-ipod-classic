@@ -1,5 +1,5 @@
 import { motion, useMotionValue } from 'framer-motion';
-import InformationBar from "../information-bar/InformationBar";
+import InformationBar from "../information-bar/information-bar";
 import BlackBorder from "./black-border";
 import ItemSelected from '../item-selected/item-selected';
 

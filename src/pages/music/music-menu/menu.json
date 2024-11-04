@@ -1,0 +1,29 @@
+{
+  "menu_options": [
+    {
+      "id": 0,
+      "title": "Music Cover",
+      "route": "/cover-flow"
+    },
+    {
+      "id": 1,
+      "title": "Playlists",
+      "route": "/playlists"
+    },
+    {
+      "id": 2,
+      "title": "Artists",
+      "route": "/artists"
+    },
+    {
+      "id": 3,
+      "title": "Albums",
+      "route": "/albums"
+    },
+    {
+      "id": 4,
+      "title": "Songs",
+      "route": "/songs"
+    }
+  ]
+}

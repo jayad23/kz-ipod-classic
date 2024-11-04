@@ -1,10 +1,12 @@
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { albums } from "../../../assets/cover";
 import Wheel from "../../../components/wheel/wheel";
 import Screen from "../../../components/screen/screen";
 import ImageFlow from "../../../components/image-flow";
 
 const CoverFlow = () => {
+  const navigate = useNavigate();
   const [direction, setDirection] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemSelected, setItemSelected] = useState(null);
@@ -39,8 +41,10 @@ const CoverFlow = () => {
   const handleButtonMenu = () => {
     if (itemSelected) {
       setItemSelected(null);
+      setCurrentItemSelectedIndex(0);
       return;
     }
+    navigate("/music");
   };
 
   return (
