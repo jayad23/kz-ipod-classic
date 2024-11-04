@@ -8,21 +8,32 @@ const CoverFlow = () => {
   const [direction, setDirection] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemSelected, setItemSelected] = useState(null);
+  const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
   const handleNext = () => {
+    if (itemSelected) {
+      setCurrentItemSelectedIndex((prev) => prev < itemSelected.songs.length - 1 ? prev + 1 : prev);
+      return;
+    }
+
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % albums.length);
   };
 
   const handlePrev = () => {
+    if (itemSelected) {
+      setCurrentItemSelectedIndex((prev) => prev > 0 ? prev - 1 : prev);
+      return;
+    }
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + albums.length) % albums.length);
   };
 
   const handleCenterButton = () => {
-    console.log("Hay click");
-    const currentAlbum = albums[currentIndex];
-    setItemSelected(currentAlbum);
+    if (!itemSelected) {
+      const currentAlbum = albums[currentIndex];
+      setItemSelected(currentAlbum);
+    }
   };
 
   const handleButtonMenu = () => {
@@ -30,14 +41,14 @@ const CoverFlow = () => {
       setItemSelected(null);
       return;
     }
-
   };
 
   return (
     <Fragment>
       <Screen
-        itemSelected={itemSelected}
         currentScreen="cover flow"
+        itemSelected={itemSelected}
+        currentSelectedIndex={currentItemSelectedIndex}
       >
         <ImageFlow
           albums={albums}

@@ -1,23 +1,11 @@
 
 
 import "./item-selected.css";
-import { useEffect, useState } from "react";
 import classnames from "classnames";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const mockSongs = [
-  "I'm like a bird",
-  "Turn off the light",
-  "Powerless",
-  "Promiscuous",
-  "Maneater",
-  "Say it right",
-  "All good things",
-  "In god's hands",
-  "Try"
-];
-
-const ItemSelected = ({ itemSelected }) => {
+const ItemSelected = ({ itemSelected, currentIndex }) => {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -82,24 +70,26 @@ const ItemSelected = ({ itemSelected }) => {
               </div>
               <div className="h-full bg-white shadow-2xl border overflow-auto">
                 {
-                  mockSongs.map((song, index) => (
+                  itemSelected.songs.map((song, index) => (
                     <motion.div
-                      key={index}
+                      key={song.id}
+                      //style={{ background: currentIndex === index ? "blueviolet" : "" }}
                       className={classnames(
                         "w-full flex items-center ",
                         "border-b border-gray-100",
-                        "hover:bg-gray-100",
+                        currentIndex === index ? "item-selected" : `bg-slate-${index % 2 === 0 ? 100 : 0}`,
                       )}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
                     >
                       <span
+                        style={{ color: currentIndex === index ? "white" : "" }}
                         className={
                           classnames("text-black text-[11px] font-bold", "span-title")
                         }
                       >
-                        {song}
+                        {song.title}
                       </span>
                     </motion.div>
                   ))
@@ -113,4 +103,4 @@ const ItemSelected = ({ itemSelected }) => {
   );
 };
 
-export default ItemSelected;
+export default ItemSelected;;

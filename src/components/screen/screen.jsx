@@ -3,7 +3,7 @@ import InformationBar from "../information-bar/InformationBar";
 import BlackBorder from "./black-border";
 import ItemSelected from '../item-selected/item-selected';
 
-const Screen = ({ children, currentScreen, itemSelected }) => {
+const Screen = ({ children, currentScreen, itemSelected, currentSelectedIndex }) => {
   const x = useMotionValue(0);
   return (
     <BlackBorder>
@@ -15,7 +15,7 @@ const Screen = ({ children, currentScreen, itemSelected }) => {
         {children}
         {
           itemSelected && (
-            <ItemSelected itemSelected={itemSelected} />
+            <ItemSelected itemSelected={itemSelected} currentIndex={currentSelectedIndex} />
           )
         }
       </motion.div>

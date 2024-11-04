@@ -8,7 +8,7 @@ const Right = ({ handleNext }) => {
       onClick={handleNext}
       className={
         classNames("absolute top-1/2 right-6 translate-x-1/2 -translate-y-1/2 text-sm",
-          "w-[30%] h-[50px] flex items-center justify-center active:scale-95"
+          "w-[50%] h-[75px] flex items-center justify-center active:scale-95"
         )
       }
     >
