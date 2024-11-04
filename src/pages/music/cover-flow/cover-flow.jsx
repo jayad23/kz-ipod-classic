@@ -61,10 +61,25 @@ const CoverFlow = () => {
         />
       </Screen>
       <Wheel
-        handlePrev={handlePrev}
-        handleNext={handleNext}
-        handleButtonMenu={handleButtonMenu}
-        handleCenterButton={handleCenterButton}
+        prev={{
+          disabled: false,
+          onClick: handlePrev,
+        }}
+        next={{
+          disabled: false,
+          onClick: handleNext,
+        }}
+        menu={{
+          disabled: false,
+          onClick: handleButtonMenu,
+        }}
+        centerButton={{
+          disabled: false,
+          onClick: handleCenterButton,
+        }}
+        play={{
+          disabled: false
+        }}
       />
     </Fragment>
   );

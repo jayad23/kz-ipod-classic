@@ -5,14 +5,14 @@ import Play from "./play-btn";
 import Right from "./right-btn";
 import Center from "./center-btn";
 
-const Wheel = ({ handlePrev, handleNext, handleCenterButton, handleButtonMenu }) => {
+const Wheel = ({ prev, next, menu, centerButton, play }) => {
   return (
     <WheelCircumference>
-      <Menu onClick={handleButtonMenu} />
-      <Left handlePrev={handlePrev} />
-      <Right handleNext={handleNext} />
-      <Play />
-      <Center onClick={handleCenterButton} />
+      <Menu {...menu} />
+      <Left {...prev} />
+      <Right {...next} />
+      <Play {...play} />
+      <Center {...centerButton} />
     </WheelCircumference>
   );
 };

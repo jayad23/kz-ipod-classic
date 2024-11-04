@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import { motion } from "framer-motion";
+import { ArrowRight } from "../assets/icons/arrow-right";
 
 const OptionsMapper = ({ options, currentIndex }) => {
   return (
@@ -9,7 +10,7 @@ const OptionsMapper = ({ options, currentIndex }) => {
           <motion.div
             key={menu.id}
             className={classnames(
-              "w-full flex items-center ",
+              "w-full flex items-center justify-between",
               "border-b border-gray-100",
               currentIndex === menu.id ? "item-selected" : `bg-slate-${menu.id % 2 === 0 ? 100 : 0}`,
             )}
@@ -25,6 +26,11 @@ const OptionsMapper = ({ options, currentIndex }) => {
             >
               {menu.title}
             </span>
+            {
+              currentIndex === menu.id && (
+                <ArrowRight width={20} height={20} />
+              )
+            }
           </motion.div>
         ))
       }
