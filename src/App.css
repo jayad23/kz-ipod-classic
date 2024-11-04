@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --size: 33%;
+}
+
+.ipod-wheel {
+  touch-action: none;
+  user-select: none;
+}
+
+.ipod-wheel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--size);
+  height: var(--size);
+  background: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 0px #00000024;
+}
+
+.cover-container {
+  perspective: 1000px;
+}
+
+.album-cover {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.wheel-shadow {
+  box-shadow: inset 1px 0px 0 0px #00000024;
+  background: radial-gradient(
+    circle at -20% -20%,
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
+    rgba(160, 160, 160, 0.495) 70%
+  );
+}
