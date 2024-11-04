@@ -43,3 +43,14 @@
     rgba(160, 160, 160, 0.495) 70%
   );
 }
+
+.blue-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgb(70, 130, 180),
+    rgb(79, 148, 205),
+    rgb(81, 152, 230),
+    rgb(79, 148, 205),
+    rgb(70, 130, 180)
+  );
+}
