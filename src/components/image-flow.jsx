@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 
-function CoverFlow({ currentIndex, albums, direction }) {
+function ImageFlow({ currentIndex, albums, direction }) {
   const getVisibleAlbums = () => {
     const buffer = [];
     const totalAlbums = albums.length;
@@ -43,7 +43,8 @@ function CoverFlow({ currentIndex, albums, direction }) {
                 x: direction > 0 ? -200 : 200,
                 rotateY: direction > 0 ? -45 : 45,
                 scale: 0.7,
-                opacity: 0
+                opacity: 0,
+                rotateX: "90deg"
               })}
               transition={{
                 duration: 0.3,
@@ -58,7 +59,9 @@ function CoverFlow({ currentIndex, albums, direction }) {
                 alt={album.title}
                 className="w-48 h-48 rounded-lg shadow-xl"
                 style={{
-                  filter: `brightness(${isCenter ? 100 : 70}%)`
+                  filter: `brightness(${isCenter ? 100 : 70}%)`,
+                  //WebkitBoxReflect: "below 1px linear-gradient(transparent, transparent, #0002)"
+                  WebkitBoxReflect: "below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))"
                 }}
               />
             </motion.div>
@@ -69,4 +72,4 @@ function CoverFlow({ currentIndex, albums, direction }) {
   );
 }
 
-export default CoverFlow;
+export default ImageFlow;

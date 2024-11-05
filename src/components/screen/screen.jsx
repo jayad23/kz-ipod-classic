@@ -1,22 +1,23 @@
-import CoverFlow from "../cover-flow";
 import { motion, useMotionValue } from 'framer-motion';
-import InformationBar from "../information-bar/InformationBar";
+import InformationBar from "../information-bar/information-bar";
 import BlackBorder from "./black-border";
+import ItemSelected from '../item-selected/item-selected';
 
-const Screen = ({ albums, direction, currentIndex }) => {
+const Screen = ({ children, currentScreen, itemSelected, currentSelectedIndex }) => {
   const x = useMotionValue(0);
   return (
     <BlackBorder>
       <motion.div
-        className="bg-white w-full h-full flex items-center justify-center overflow-hidden relative"
+        className="bg-white w-full h-[250px] flex items-center justify-center overflow-hidden relative border"
         style={{ x }}
       >
-        <InformationBar />
-        <CoverFlow
-          albums={albums}
-          direction={direction}
-          currentIndex={currentIndex}
-        />
+        <InformationBar currentScreen={currentScreen} />
+        {children}
+        {
+          itemSelected && (
+            <ItemSelected itemSelected={itemSelected} currentIndex={currentSelectedIndex} />
+          )
+        }
       </motion.div>
     </BlackBorder>
   );

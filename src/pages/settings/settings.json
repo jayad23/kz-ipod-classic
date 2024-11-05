@@ -1,0 +1,177 @@
+{
+  "menu_options": [
+    {
+      "id": 0,
+      "title": "Background",
+      "sub_title": "Preview mode on",
+      "key": "background",
+      "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
+      "values": [
+        {
+          "label": "Default",
+          "value": "rgb(17 24 39)"
+        },
+        {
+          "label": "White",
+          "value": "#fff"
+        },
+        {
+          "label": "Black",
+          "value": "#000"
+        },
+        {
+          "label": "Gray",
+          "value": "#eee"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "iPod Color",
+      "sub_title": "Preview mode on",
+      "key": "body",
+      "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
+      "values": [
+        {
+          "label": "Moon light",
+          "value": "#bbbfc2"
+        },
+        {
+          "label": "Matte black",
+          "value": "#343434"
+        },
+        {
+          "label": "Mulberry",
+          "value": "#6A1E55"
+        },
+        {
+          "label": "Vivid Orange",
+          "value": "#F09319"
+        },
+        {
+          "label": "Alabaster",
+          "value": "#F3F3E0"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Wheel Color",
+      "sub_title": "Preview mode on",
+      "key": "wheel",
+      "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
+      "values": [
+        {
+          "label": "Floral white",
+          "value": "#FFFAF0"
+        },
+        {
+          "label": "White",
+          "value": "#fff"
+        },
+        {
+          "label": "Black",
+          "value": "#000"
+        },
+        {
+          "label": "Pale yellow",
+          "value": "#FCF596"
+        },
+        {
+          "label": "Light Coral",
+          "value": "#FF9C73"
+        },
+        {
+          "label": "Alabaster",
+          "value": "#F3F3E0"
+        },
+        {
+          "label": "Mint Cream",
+          "value": "#DFF2EB"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Text Color",
+      "sub_title": "Preview mode on",
+      "key": "text",
+      "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
+      "values": [
+        {
+          "label": "Red",
+          "value": "#FF0000"
+        },
+        {
+          "label": "Moon light",
+          "value": "#bbbfc2"
+        },
+        {
+          "label": "Matte black",
+          "value": "#343434"
+        },
+        {
+          "label": "Mulberry",
+          "value": "#6A1E55"
+        },
+        {
+          "label": "Vivid Orange",
+          "value": "#F09319"
+        },
+        {
+          "label": "Alabaster",
+          "value": "#F3F3E0"
+        },
+        {
+          "label": "Ash grey",
+          "value": "#5f5959"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Size",
+      "sub_title": "Preview mode on",
+      "key": "dimensions",
+      "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
+      "values": [
+        {
+          "label": "Small",
+          "value": {
+            "dimensions": {
+              "size": "small",
+              "width": "360px",
+              "height": "600px",
+              "circumference": "15rem",
+              "padding": "1.25rem",
+              "borderRadius": "20px",
+              "marginTop": 0,
+              "center_button": {
+                "top": "40.5px",
+                "circumference": "80px"
+              }
+            }
+          }
+        },
+        {
+          "label": "Wide",
+          "value": {
+            "dimensions": {
+              "size": "wide",
+              "width": "100%",
+              "height": "100vh",
+              "circumference": "18rem",
+              "padding": "0.75rem",
+              "borderRadius": 0,
+              "marginTop": "35px",
+              "center_button": {
+                "top": "40px",
+                "circumference": "105px"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

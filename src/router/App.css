@@ -43,3 +43,40 @@
     rgba(160, 160, 160, 0.495) 70%
   );
 }
+
+.blue-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgb(70, 130, 180),
+    rgb(79, 148, 205),
+    rgb(81, 152, 230),
+    rgb(79, 148, 205),
+    rgb(70, 130, 180)
+  );
+}
+
+.open-left-animation {
+  animation: open-left 0.5s forwards;
+}
+
+.open-right-animation {
+  animation: open-right 0.5s forwards;
+}
+
+@keyframes open-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes open-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "menu_options": [
+    {
+      "id": 0,
+      "title": "Music",
+      "route": "/music"
+    },
+    {
+      "id": 1,
+      "title": "Video",
+      "route": "/video"
+    },
+    {
+      "id": 2,
+      "title": "Photos",
+      "route": "/photos"
+    },
+    {
+      "id": 3,
+      "title": "Podcast",
+      "route": "/podcast"
+    },
+    {
+      "id": 4,
+      "title": "Radio stations",
+      "route": "/radio-stations"
+    },
+    {
+      "id": 5,
+      "title": "Shuffle Songs",
+      "route": "/shuffle-songs"
+    },
+    {
+      "id": 6,
+      "title": "Now playing",
+      "route": "/:id/now-playing"
+    },
+    {
+      "id": 7,
+      "title": "Settings",
+      "route": "/settings"
+    }
+  ]
+}
