@@ -4,6 +4,7 @@ const initialState = {
   theme: {
     name: "default",
     config: {
+      background: "rgb(17 24 39)",
       body: "#bbbfc2",
       text: "#5f5959",
       wheel: "#FFFAF0"
@@ -21,15 +22,13 @@ const AppearanceContext = createContext(initialState);
 
 const reducerFunction = (state, action) => {
   switch (action.type) {
-    case "SET_THEME":
+    case "PREVIEW":
       return {
         ...state,
-        theme: action.payload
-      };
-    case "SET_DIMENSIONS":
-      return {
-        ...state,
-        dimensions: action.payload
+        theme: {
+          ...state.theme,
+          ...action.payload
+        }
       };
     default:
       return state;

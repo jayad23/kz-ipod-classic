@@ -1,11 +1,11 @@
 
-import { albums } from "../assets/cover.js";
+//import { albums } from "../assets/cover.js";
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const images = albums.map((album) => album.cover);
+//const images = albums.map((album) => album.cover);
 
-const RandomFloatingImage = () => {
+const RandomFloatingImage = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const RandomFloatingImage = () => {
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Cambia al siguiente índice
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [images]);
 
   const randomPosition = () => ({
     x: Math.floor(Math.random() * 20 - 10) + '%',

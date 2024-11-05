@@ -2,12 +2,15 @@
 import { Fragment, useState } from "react";
 import menu_data from "./menu.json";
 import classnames from "classnames";
+import { albums } from "../../assets/cover";
 import { useNavigate } from "react-router-dom";
 import Wheel from "../../components/wheel/wheel";
 import OptionsMapper from "../../components/options.mapper";
 import MenuScreen from "../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../components/random-floating-image";
 import InformationBar from "../../components/information-bar/information-bar";
+
+const images = albums.map((album) => album.cover);
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ const Menu = () => {
           <OptionsMapper options={menu_data.menu_options} currentIndex={currentIndex} />
         </div>
         <div id="right" className={classnames("bg-slate-900 w-[70%] h-full absolute z-10 right-0")}>
-          <RandomFloatingImage />
+          <RandomFloatingImage images={images} />
         </div>
       </MenuScreen>
       <Wheel
