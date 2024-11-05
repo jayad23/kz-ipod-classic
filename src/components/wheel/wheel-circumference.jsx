@@ -3,11 +3,16 @@ import classNames from "classnames";
 import { AppearanceContext } from "../../contexts/appearance";
 
 const WheelCircumference = ({ children }) => {
-  const { theme } = useContext(AppearanceContext);
+  const { theme, dimensions } = useContext(AppearanceContext);
   return (
     <div
-      style={{ background: theme.config.wheel }}
-      className={classNames("ipod-wheel relative w-60 h-60 rounded-full mx-auto cursor-pointer overflow-hidden", "wheel-shadow")}
+      style={{
+        background: theme.config.wheel,
+        width: dimensions.circumference,
+        height: dimensions.circumference,
+        marginTop: dimensions.marginTop
+      }}
+      className={classNames("ipod-wheel relative rounded-full mx-auto cursor-pointer overflow-hidden", "wheel-shadow")}
     >
       {children}
     </div>

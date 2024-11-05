@@ -16,28 +16,36 @@ import { AppearanceContext } from "../../contexts/appearance";
 const Settings = () => {
   const navigate = useNavigate();
 
-  const { theme, setTheme } = useContext(AppearanceContext);
+  const { theme, dimensions, setTheme } = useContext(AppearanceContext);
 
   const [itemSelected, setItemSelected] = useState(null);
   const [menuCurrentIndex, setMenuCurrentIndex] = useState(0);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
   const [disabledCenterButton, setDisabledCenterButton] = useState(false);
 
-  const onUpdateThemeContext = (idx) => {
-    const payload = {
-      config: {
-        ...theme.config,
-        [itemSelected.key]: itemSelected.values[idx].value,
-      }
-    };
-    setTheme({ type: "PREVIEW", payload });
+  const onUpdateThemeContext = (idx, type) => {
+    console.log("idx", idx, "type", type);
+    if (type === "theme") {
+      const payload = {
+        config: {
+          ...theme.config,
+          [itemSelected.key]: itemSelected.values[idx].value,
+        }
+      };
+      setTheme({ type: "PREVIEW", payload });
+    } else if (type === "dimensions") {
+      console.log(itemSelected);
+      const payload = itemSelected.values[idx].value.dimensions;
+      setTheme({ type: "PREVIEW_DIMENSIONS", payload });
+    }
   };
 
   const handleNext = () => {
     if (itemSelected) {
       const index = currentItemSelectedIndex < itemSelected.values.length - 1 ? currentItemSelectedIndex + 1 : currentItemSelectedIndex;
       setCurrentItemSelectedIndex(index);
-      onUpdateThemeContext(index);
+      const context_key = itemSelected.key === "dimensions" ? "dimensions" : "theme";
+      onUpdateThemeContext(index, context_key);
       return;
     }
     setMenuCurrentIndex(prevIndex => prevIndex < settings_options.menu_options.length - 1 ? prevIndex + 1 : prevIndex);
@@ -47,7 +55,8 @@ const Settings = () => {
     if (itemSelected) {
       const index = currentItemSelectedIndex > 0 ? currentItemSelectedIndex - 1 : currentItemSelectedIndex;
       setCurrentItemSelectedIndex(index);
-      onUpdateThemeContext(index);
+      const context_key = itemSelected.key === "dimensions" ? "dimensions" : "theme";
+      onUpdateThemeContext(index, context_key);
       return;
     }
     setMenuCurrentIndex(prevIndex => prevIndex > 0 ? prevIndex - 1 : prevIndex);
@@ -56,15 +65,26 @@ const Settings = () => {
   const handleCenterButton = () => {
     const menu_item_selected = settings_options.menu_options[menuCurrentIndex];
     if (menu_item_selected) {
-      console.log("menu_item_selected", menu_item_selected);
-      const reformatted_options = menu_item_selected.values.filter((value) => value.value !== theme.config[menu_item_selected.key]);
-      const selected_option = menu_item_selected.values.find((value) => value.value === theme.config[menu_item_selected.key]);
-      const payload = {
-        ...menu_item_selected,
-        values: selected_option ? [selected_option, ...reformatted_options] : reformatted_options,
-      };
-      setItemSelected(payload);
-      setDisabledCenterButton(true);
+      if (menu_item_selected.key !== "dimensions") {
+        console.log("menu_item_selected", menu_item_selected);
+        const reformatted_options = menu_item_selected.values.filter((value) => value.value !== theme.config[menu_item_selected.key]);
+        const selected_option = menu_item_selected.values.find((value) => value.value === theme.config[menu_item_selected.key]);
+        const payload = {
+          ...menu_item_selected,
+          values: selected_option ? [selected_option, ...reformatted_options] : reformatted_options,
+        };
+        setItemSelected(payload);
+        setDisabledCenterButton(true);
+      } else if (menu_item_selected.key === "dimensions") {
+        const reformatted_options = menu_item_selected.values.filter((value) => value.label.toLowerCase() !== dimensions.size);
+        const selected_option = menu_item_selected.values.find((value) => value.label.toLowerCase() === dimensions.size);
+        const payload = {
+          ...menu_item_selected,
+          values: selected_option ? [selected_option, ...reformatted_options] : reformatted_options,
+        };
+        setItemSelected(payload);
+        setDisabledCenterButton(true);
+      }
     }
   };
 

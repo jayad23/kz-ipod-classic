@@ -12,10 +12,16 @@ const initialState = {
   },
   dimensions: {
     size: "small",
-    // width: "100%",
-    // height: "92vh",
     width: "360px",
     height: "600px",
+    circumference: "15rem",
+    padding: "1.25rem",
+    borderRadius: "20px",
+    marginTop: 0,
+    center_button: {
+      top: "40.5px",
+      circumference: "80px"
+    }
   }
 };
 const AppearanceContext = createContext(initialState);
@@ -27,6 +33,13 @@ const reducerFunction = (state, action) => {
         ...state,
         theme: {
           ...state.theme,
+          ...action.payload
+        }
+      };
+    case "PREVIEW_DIMENSIONS":
+      return {
+        ...state,
+        dimensions: {
           ...action.payload
         }
       };

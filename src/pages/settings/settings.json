@@ -136,7 +136,40 @@
       "photo_url": "https://res.cloudinary.com/ddjp7g5zt/image/upload/v1730826888/jsloyao9x2yg46fntxco.jpg",
       "values": [
         {
-          "value": ""
+          "label": "Small",
+          "value": {
+            "dimensions": {
+              "size": "small",
+              "width": "360px",
+              "height": "600px",
+              "circumference": "15rem",
+              "padding": "1.25rem",
+              "borderRadius": "20px",
+              "marginTop": 0,
+              "center_button": {
+                "top": "40.5px",
+                "circumference": "80px"
+              }
+            }
+          }
+        },
+        {
+          "label": "Wide",
+          "value": {
+            "dimensions": {
+              "size": "wide",
+              "width": "100%",
+              "height": "100vh",
+              "circumference": "18rem",
+              "padding": "0.75rem",
+              "borderRadius": 0,
+              "marginTop": "35px",
+              "center_button": {
+                "top": "40px",
+                "circumference": "105px"
+              }
+            }
+          }
         }
       ]
     }
