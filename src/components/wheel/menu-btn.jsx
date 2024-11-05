@@ -1,6 +1,9 @@
 import classNames from "classnames";
+import { useContext } from "react";
+import { AppearanceContext } from "../../contexts/appearance";
 
 const Menu = ({ onClick, disabled }) => {
+  const { theme } = useContext(AppearanceContext);
   return (
     <button
       type="button"
@@ -12,7 +15,7 @@ const Menu = ({ onClick, disabled }) => {
         )
       }
     >
-      <div className="mb-4">
+      <div style={{ color: theme.config.text }} className="mb-4">
         MENU
       </div>
     </button>

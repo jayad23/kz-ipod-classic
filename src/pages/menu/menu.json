@@ -34,6 +34,11 @@
       "id": 6,
       "title": "Now playing",
       "route": "/:id/now-playing"
+    },
+    {
+      "id": 7,
+      "title": "Settings",
+      "route": "/settings"
     }
   ]
 }

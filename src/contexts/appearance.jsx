@@ -5,7 +5,7 @@ const initialState = {
     name: "default",
     config: {
       body: "#bbbfc2",
-      text: "",
+      text: "#5f5959",
       wheel: "#FFFAF0"
     }
   },

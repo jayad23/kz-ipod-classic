@@ -1,0 +1,44 @@
+{
+  "menu_options": [
+    {
+      "id": 0,
+      "title": "Background",
+      "value": "",
+      "options": [
+        "#fff",
+        "#0000",
+        ""
+      ]
+    },
+    {
+      "id": 1,
+      "title": "iPod Color",
+      "value": "",
+      "options": [
+        "#28282B",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Wheel Color",
+      "value": "",
+      "options": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Size",
+      "value": "",
+      "options": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}
