@@ -24,7 +24,6 @@ const Settings = () => {
   const [disabledCenterButton, setDisabledCenterButton] = useState(false);
 
   const onUpdateThemeContext = (idx, type) => {
-    console.log("idx", idx, "type", type);
     if (type === "theme") {
       const payload = {
         config: {
@@ -34,7 +33,6 @@ const Settings = () => {
       };
       setTheme({ type: "PREVIEW", payload });
     } else if (type === "dimensions") {
-      console.log(itemSelected);
       const payload = itemSelected.values[idx].value.dimensions;
       setTheme({ type: "PREVIEW_DIMENSIONS", payload });
     }
@@ -66,7 +64,6 @@ const Settings = () => {
     const menu_item_selected = settings_options.menu_options[menuCurrentIndex];
     if (menu_item_selected) {
       if (menu_item_selected.key !== "dimensions") {
-        console.log("menu_item_selected", menu_item_selected);
         const reformatted_options = menu_item_selected.values.filter((value) => value.value !== theme.config[menu_item_selected.key]);
         const selected_option = menu_item_selected.values.find((value) => value.value === theme.config[menu_item_selected.key]);
         const payload = {
