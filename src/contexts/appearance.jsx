@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-const initialState = {
+const defaultTheme = {
   theme: {
     name: "default",
     config: {
@@ -24,6 +24,11 @@ const initialState = {
     }
   }
 };
+
+const initialState = localStorage.getItem("ipod_theme") ? JSON.parse(localStorage.getItem("ipod_theme")) : defaultTheme;
+
+
+
 const AppearanceContext = createContext(initialState);
 
 const reducerFunction = (state, action) => {
@@ -42,6 +47,16 @@ const reducerFunction = (state, action) => {
         dimensions: {
           ...action.payload
         }
+      };
+    case "SET_THEME":
+      localStorage.setItem("ipod_theme", JSON.stringify(state));
+      return {
+        ...state,
+      };
+    case "RESET_THEME":
+      localStorage.removeItem("ipod_theme");
+      return {
+        ...defaultTheme,
       };
     default:
       return state;

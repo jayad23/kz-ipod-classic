@@ -11,6 +11,12 @@ import RandomFloatingImage from "../../components/random-floating-image";
 import InformationBar from "../../components/information-bar/information-bar";
 import GenericItemSelected from "../../components/item-selected/generic-item-selected";
 import { AppearanceContext } from "../../contexts/appearance";
+import { Loading } from "../../assets/icons/loading";
+
+const confirm_options = ["1. Save your preferences",
+  "2. Restore default preferences",
+  "3. Return to the menu"
+];
 
 
 const Settings = () => {
@@ -20,8 +26,12 @@ const Settings = () => {
 
   const [itemSelected, setItemSelected] = useState(null);
   const [menuCurrentIndex, setMenuCurrentIndex] = useState(0);
-  const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
   const [disabledCenterButton, setDisabledCenterButton] = useState(false);
+  const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
+
+  const [confirmExit, setConfirmExit] = useState(false);
+  const [confirmOptionIndex, setConfirmOptionIndex] = useState(0);
+  const [savingPreference, setSavingPreference] = useState(false);
 
   const onUpdateThemeContext = (idx, type) => {
     if (type === "theme") {
@@ -39,6 +49,12 @@ const Settings = () => {
   };
 
   const handleNext = () => {
+    if (confirmExit) {
+      const index = confirmOptionIndex < confirm_options.length - 1 ? confirmOptionIndex + 1 : confirmOptionIndex;
+      setConfirmOptionIndex(index);
+      return;
+    }
+
     if (itemSelected) {
       const index = currentItemSelectedIndex < itemSelected.values.length - 1 ? currentItemSelectedIndex + 1 : currentItemSelectedIndex;
       setCurrentItemSelectedIndex(index);
@@ -50,6 +66,11 @@ const Settings = () => {
   };
 
   const handlePrev = () => {
+    if (confirmExit) {
+      const index = confirmOptionIndex > 0 ? confirmOptionIndex - 1 : confirmOptionIndex;
+      setConfirmOptionIndex(index);
+      return;
+    }
     if (itemSelected) {
       const index = currentItemSelectedIndex > 0 ? currentItemSelectedIndex - 1 : currentItemSelectedIndex;
       setCurrentItemSelectedIndex(index);
@@ -61,6 +82,24 @@ const Settings = () => {
   };
 
   const handleCenterButton = () => {
+    if (confirmExit) {
+      const confirmation_selected = confirm_options[confirmOptionIndex];
+      setSavingPreference(true);
+      if (confirmation_selected === "1. Save your preferences") {
+        setTheme({ type: "SET_THEME" });
+      } else if (confirmation_selected === "2. Restore default preferences") {
+        setTheme({ type: "RESET_THEME" });
+      } else if (confirmation_selected === "3. Return to the menu") {
+        setConfirmExit(false);
+        navigate("/menu");
+      }
+      setTimeout(() => {
+        setSavingPreference(false);
+        setConfirmExit(false);
+        navigate("/menu");
+      }, 2000);
+      return;
+    }
     const menu_item_selected = settings_options.menu_options[menuCurrentIndex];
     if (menu_item_selected) {
       if (menu_item_selected.key !== "dimensions") {
@@ -92,15 +131,49 @@ const Settings = () => {
       setCurrentItemSelectedIndex(0);
       return;
     }
-    navigate("/menu");
+    setConfirmExit(true);
   };
 
   return (
     <Fragment>
       <MenuScreen>
-        {
-          itemSelected && <GenericItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />
-        }
+        {itemSelected && <GenericItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />}
+        {confirmExit && (
+          <div className="bg-black bg-opacity-50 absolute top-0 left-0 w-full h-full flex justify-center items-center z-50">
+            <div className="flex flex-col items-left w-[85%] h-1/2 bg-white p-3 rounded-md">
+
+              <h3 className="text-xs text-center font-semibold text-slate-600">
+                🔔 CONFIRM YOUR ACTIONS FIRST
+              </h3>
+              <ul className="mt-2">
+                {
+                  confirm_options.map((text, index) => (
+                    <li
+                      key={index}
+                      style={{
+                        padding: "3px 10px",
+                        color: index === confirmOptionIndex ? "white" : "#5f5959",
+                        fontWeight: index === confirmOptionIndex ? "bold" : "normal",
+                      }}
+                      className={classnames("text-xs text-gray-600 active:scale-95 flex items-center justify-between", { ["item-selected"]: index === confirmOptionIndex })}
+                    >
+                      <span>
+                        {text}
+                      </span>
+                      {
+                        index === confirmOptionIndex && savingPreference && (
+                          <span>
+                            <Loading />
+                          </span>
+                        )
+                      }
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        )}
         <div id="left" className={classnames("w-[45%] h-full flex flex-col absolute z-20 left-0")}>
           <InformationBar currentScreen="Settings" dark_line />
           <OptionsMapper options={settings_options.menu_options} currentIndex={menuCurrentIndex} />
