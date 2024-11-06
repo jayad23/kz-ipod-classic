@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 const manifestForPlugin = {
-  registerType: "prompt",
+  registerType: "autoUpdate",
   includeAssets: ["favicon.ico", "apple-touch-icon.png", "maskable_icon.png"],
   manifest: {
     short_name: "Kz iPod",
