@@ -1,23 +1,17 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-//import { albums } from "../../../assets/cover";
 import Wheel from "../../../components/wheel/wheel";
 import Screen from "../../../components/screen/screen";
 import ImageFlow from "../../../components/image-flow";
-
-import { useQuery } from "@tanstack/react-query";
-import { onFetcher } from "../../../api/fetcher";
+import { PlayerContext } from "../../../contexts/player";
 
 const CoverFlow = () => {
   const navigate = useNavigate();
+  const { albums } = useContext(PlayerContext);
   const [direction, setDirection] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemSelected, setItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
-
-  const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
-
-  const albums = data ? data.data : [];
 
   const handleNext = () => {
     if (itemSelected) {

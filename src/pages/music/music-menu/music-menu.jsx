@@ -1,20 +1,29 @@
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import menu_data from "./menu.json";
 import classnames from "classnames";
-import { albums } from "../../../assets/cover";
 import { useNavigate } from "react-router-dom";
+// import { useQuery } from "@tanstack/react-query";
+// import { onFetcher } from "../../../api/fetcher";
 import Wheel from "../../../components/wheel/wheel";
 import OptionsMapper from "../../../components/options.mapper";
 import MenuScreen from "../../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../../components/random-floating-image";
 import InformationBar from "../../../components/information-bar/information-bar";
+import { PlayerContext } from "../../../contexts/player";
 
-const images = albums.map((album) => album.cover);
+const getOnlyImages = (albums) => {
+  const images = albums.map((album) => album.cover);
+  return images;
+};
 
 const MusicMenu = () => {
-  const navigate = useNavigate();
+  // const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
 
+  // const albums = data ? data.data : [];
+
+  const navigate = useNavigate();
+  const { albums } = useContext(PlayerContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleNext = () => {
     setCurrentIndex(prevIndex => prevIndex < menu_data.menu_options.length - 1 ? prevIndex + 1 : prevIndex);
@@ -49,7 +58,7 @@ const MusicMenu = () => {
           <OptionsMapper options={menu_data.menu_options} currentIndex={currentIndex} />
         </div>
         <div id="right" className={classnames("bg-slate-900 w-[70%] h-full absolute z-10 right-0")}>
-          <RandomFloatingImage images={images} />
+          <RandomFloatingImage images={getOnlyImages(albums)} />
         </div>
       </MenuScreen>
       <Wheel
