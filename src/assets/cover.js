@@ -81,4 +81,33 @@ export const albums = [
       },
     ],
   },
+  {
+    id: 6,
+    album_title: "All eyes on me",
+    artist: "2Pac",
+    cover: "https://i.scdn.co/image/ab67616d0000b2732528374ad9aea48cff0313b2",
+    songs: [
+      {
+        id: v4(),
+        title: "Afraid",
+        duration: "4:04",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      },
+    ],
+  },
+  {
+    id: 7,
+    album_title: "All eyes on me",
+    artist: "2Pac",
+    cover:
+      "https://img1.picmix.com/output/stamp/normal/0/1/3/9/1599310_d0a74.gif",
+    songs: [
+      {
+        id: v4(),
+        title: "Afraid",
+        duration: "4:04",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      },
+    ],
+  },
 ];

@@ -2,7 +2,7 @@
 
 import "./item-selected.css";
 import classnames from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ItemSelected = ({ itemSelected, currentIndex }) => {
@@ -17,6 +17,17 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
     }
 
   }, [itemSelected]);
+
+  const songRefs = useRef([]);
+
+  useEffect(() => {
+    if (songRefs.current[currentIndex]) {
+      songRefs.current[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <AnimatePresence>
@@ -73,7 +84,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                   itemSelected.songs.map((song, index) => (
                     <motion.div
                       key={song.id}
-                      //style={{ background: currentIndex === index ? "blueviolet" : "" }}
+                      ref={(el) => (songRefs.current[index] = el)}
                       className={classnames(
                         "w-full flex items-center ",
                         "border-b border-gray-100",
@@ -89,7 +100,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                           classnames("text-black text-[11px] font-bold", "span-title")
                         }
                       >
-                        {song.title}
+                        {song.songName}
                       </span>
                     </motion.div>
                   ))
