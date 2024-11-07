@@ -2,7 +2,7 @@
 
 import "./item-selected.css";
 import classnames from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GenericItemSelected = ({ itemSelected, currentIndex }) => {
@@ -10,7 +10,6 @@ const GenericItemSelected = ({ itemSelected, currentIndex }) => {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-
     if (itemSelected) {
       setTimeout(() => {
         setSelected(itemSelected);
@@ -18,6 +17,18 @@ const GenericItemSelected = ({ itemSelected, currentIndex }) => {
     }
 
   }, [itemSelected]);
+
+  const songRefs = useRef([]);
+
+  useEffect(() => {
+    if (songRefs.current[currentIndex]) {
+      songRefs.current[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [currentIndex]);
+
 
   return (
     <AnimatePresence>
@@ -75,6 +86,7 @@ const GenericItemSelected = ({ itemSelected, currentIndex }) => {
                   itemSelected.values.map((value, index) => (
                     <motion.div
                       key={value.label}
+                      ref={(el) => (songRefs.current[index] = el)}
                       className={classnames(
                         "w-full flex items-center ",
                         "border-b border-gray-100",

@@ -9,7 +9,6 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-
     if (itemSelected) {
       setTimeout(() => {
         setSelected(itemSelected);
