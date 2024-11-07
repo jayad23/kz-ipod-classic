@@ -1,9 +1,8 @@
 import { motion, useMotionValue } from 'framer-motion';
 import InformationBar from "../information-bar/information-bar";
 import BlackBorder from "./black-border";
-import ItemSelected from '../item-selected/item-selected';
 
-const Screen = ({ children, currentScreen, itemSelected, currentSelectedIndex }) => {
+const Screen = ({ children, currentScreen }) => {
   const x = useMotionValue(0);
   return (
     <BlackBorder>
@@ -13,11 +12,6 @@ const Screen = ({ children, currentScreen, itemSelected, currentSelectedIndex })
       >
         <InformationBar currentScreen={currentScreen} />
         {children}
-        {
-          itemSelected && (
-            <ItemSelected itemSelected={itemSelected} currentIndex={currentSelectedIndex} />
-          )
-        }
       </motion.div>
     </BlackBorder>
   );

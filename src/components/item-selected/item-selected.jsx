@@ -2,10 +2,11 @@
 
 import "./item-selected.css";
 import classnames from "classnames";
+import defaultLoadingPhoto from "./settings.png";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ItemSelected = ({ itemSelected, currentIndex }) => {
+const ItemSelected = ({ itemSelected, currentIndex, dark_bg = false }) => {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -17,11 +18,11 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
 
   }, [itemSelected]);
 
-  const songRefs = useRef([]);
+  const itemRef = useRef([]);
 
   useEffect(() => {
-    if (songRefs.current[currentIndex]) {
-      songRefs.current[currentIndex].scrollIntoView({
+    if (itemRef.current[currentIndex]) {
+      itemRef.current[currentIndex].scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
       });
@@ -31,6 +32,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
   return (
     <AnimatePresence>
       <div
+        style={{ zIndex: 10000, backgroundColor: selected && dark_bg ? "rgba(0, 0, 0, 0.4)" : "" }}
         className={classnames(
           "absolute top-0 left-0 w-full h-full flex justify-center items-end",
         )}
@@ -47,7 +49,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                 repeatDelay: 1,
               }}
             >
-              <img alt={itemSelected.album_title} src={itemSelected?.cover} />
+              <img alt={itemSelected?.title} src={itemSelected?.photo_url || defaultLoadingPhoto} />
             </motion.div>
           ) : (
             <motion.div
@@ -67,7 +69,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                     classnames("text-white text-md font-bold", "span-title")
                   }
                 >
-                  {itemSelected?.album_title}
+                  {itemSelected?.title}
                 </span>
                 <span
                   style={{ padding: "0 0 0 10px" }}
@@ -75,15 +77,15 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                     classnames("text-white text-[9px]")
                   }
                 >
-                  {itemSelected?.artist}
+                  {itemSelected?.sub_title}
                 </span>
               </div>
               <div className="h-full bg-white shadow-2xl border overflow-auto">
                 {
-                  itemSelected.songs.map((song, index) => (
+                  itemSelected.values.map((song, index) => (
                     <motion.div
-                      key={song.id}
-                      ref={(el) => (songRefs.current[index] = el)}
+                      key={song?.id || index}
+                      ref={(el) => (itemRef.current[index] = el)}
                       className={classnames(
                         "w-full flex items-center ",
                         "border-b border-gray-100",
@@ -99,7 +101,7 @@ const ItemSelected = ({ itemSelected, currentIndex }) => {
                           classnames("text-black text-[11px] font-bold", "span-title")
                         }
                       >
-                        {song.songName}
+                        {song.label}
                       </span>
                     </motion.div>
                   ))

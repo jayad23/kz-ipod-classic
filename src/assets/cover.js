@@ -1,15 +1,3 @@
-import { v4 } from "uuid";
-const mockSongs = [
-  "I'm like a bird",
-  "Turn off the light",
-  "Powerless",
-  "Promiscuous",
-  "Maneater",
-  "Say it right",
-  "All good things",
-  "In god's hands",
-  "Try",
-];
 export const albums = [
   {
     id: 1,
@@ -17,26 +5,12 @@ export const albums = [
     artist: "Nelly Furtado",
     cover:
       "https://upload.wikimedia.org/wikipedia/en/5/55/Loose_%28Nelly_Furtado_album_-_cover_art%29.png",
-    songs: mockSongs.map((song) => ({
-      id: v4(),
-      title: song,
-      duration: "4:04",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    })),
   },
   {
     id: 2,
     album_title: "Lo mejor de Juanes",
     artist: "Juanes",
     cover: "https://i.scdn.co/image/ab67616d00001e020384733667e5e8d61c11ec14",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
   },
   {
     id: 3,
@@ -44,70 +18,51 @@ export const albums = [
     artist: "Ruston Kelly",
     cover:
       "https://m.media-amazon.com/images/I/71nKXv2gdCL._UF1000,1000_QL80_.jpg",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
   },
   {
     id: 4,
     album_title: "Legend",
     artist: "Bob Marley & The Wailers",
     cover: "https://i.scdn.co/image/ab67616d0000b2733dad91f4a796045ac25496f3",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
   },
   {
     id: 5,
     album_title: "All eyes on me",
     artist: "2Pac",
     cover: "https://upload.wikimedia.org/wikipedia/en/1/16/Alleyezonme.jpg",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
   },
   {
     id: 6,
-    album_title: "All eyes on me",
-    artist: "2Pac",
-    cover: "https://i.scdn.co/image/ab67616d0000b2732528374ad9aea48cff0313b2",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
+    album_title: "The EMINEM Show",
+    artist: "Eminem",
+    cover: "https://upload.wikimedia.org/wikipedia/en/3/35/The_Eminem_Show.jpg",
   },
   {
     id: 7,
-    album_title: "All eyes on me",
-    artist: "2Pac",
+    album_title: "Guns and Roses",
+    artist: "Eminem",
     cover:
-      "https://img1.picmix.com/output/stamp/normal/0/1/3/9/1599310_d0a74.gif",
-    songs: [
-      {
-        id: v4(),
-        title: "Afraid",
-        duration: "4:04",
-        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      },
-    ],
+      "https://wallpapers.com/images/hd/compilation-album-guns-n-roses-greatest-hits-r88kqlnt19nvvng0.jpg",
+  },
+  {
+    id: 8,
+    album_title: "Seven Nation Army",
+    artist: "The White Stripes",
+    cover:
+      "https://res.cloudinary.com/roli-assets/image/upload/dpr_2.0,f_auto,w_350,h_350,c_fill,fl_progressive:semi/rkc25yrontcnenw2bq7b.jpg",
+  },
+  {
+    id: 9,
+    album_title: "Let go",
+    artist: "Avril Lavigne",
+    cover:
+      "https://cdn-p.smehost.net/sites/35faef12c1b64b21b3fda052d205af13/wp-content/uploads/2022/06/AvrilLavigne_LetGo20thAnniversary_Cover_FEAT.jpg",
+  },
+  {
+    id: 10,
+    album_title: "Best of",
+    artist: "50 Cent",
+    cover:
+      "https://cdns-images.dzcdn.net/images/cover/58ec83e8f74b55096f2115523eb9e7df/0x1900-000000-80-0-0.jpg",
   },
 ];

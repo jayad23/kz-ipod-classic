@@ -9,7 +9,7 @@ import MenuScreen from "../../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../../components/random-floating-image";
 import InformationBar from "../../../components/information-bar/information-bar";
 import { PlayerContext } from "../../../contexts/player";
-import GenericItemSelected from "../../../components/item-selected/generic-item-selected";
+import ItemSelected from "../../../components/item-selected/item-selected";
 
 const getOnlyImages = (albums) => {
   const images = albums.map((album) => album.cover);
@@ -24,10 +24,21 @@ const MusicMenu = () => {
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
   const handleNext = () => {
+    if (menuItemSelected) {
+      const loopedThroughValues = menuItemSelected.values;
+      const nextIndex = currentItemSelectedIndex < loopedThroughValues.length - 1 ? currentItemSelectedIndex + 1 : currentItemSelectedIndex;
+      setCurrentItemSelectedIndex(nextIndex);
+      return;
+    }
     setCurrentIndex(prevIndex => prevIndex < menu_data.menu_options.length - 1 ? prevIndex + 1 : prevIndex);
   };
 
   const handlePrev = () => {
+    if (menuItemSelected) {
+      const prevIndex = currentItemSelectedIndex > 0 ? currentItemSelectedIndex - 1 : currentItemSelectedIndex;
+      setCurrentItemSelectedIndex(prevIndex);
+      return;
+    }
     setCurrentIndex(prevIndex => prevIndex > 0 ? prevIndex - 1 : prevIndex);
   };
 
@@ -42,17 +53,54 @@ const MusicMenu = () => {
         navigate(`/music${menu_item_selected.route}`);
       }, 425);
       return;
+    } else if (menu_item_selected && menu_item_selected.id === 1) {
+      const payload = {
+        title: menu_item_selected?.title,
+        sub_title: `${albums.length} ${menu_item_selected?.title}`,
+        photo_url: "",
+        values: albums.map((album) => ({ ...album, label: album.album_title }))
+      };
+      setMenuItemSelected(payload);
+      return;
+    } else if (menu_item_selected && menu_item_selected.id === 2) {
+      const artists = [];
+      const values = [];
+      let index = 0;
+      for (const album of albums) {
+        for (const song of album.songs) {
+          const artist = song?.artist;
+          if (artist && !artists.includes(artist)) {
+            artists.push(artist);
+            values.push({ ...song, label: artist, id: index++ });
+          }
+          continue;
+        }
+      };
+
+      const payload = {
+        title: menu_item_selected?.title,
+        sub_title: `${values.length} ${menu_item_selected?.title}`,
+        photo_url: "",
+        values: values
+      };
+      setMenuItemSelected(payload);
+      return;
     }
   };
 
   const handleButtonMenu = () => {
+    if (menuItemSelected) {
+      setMenuItemSelected(null);
+      setCurrentItemSelectedIndex(0);
+      return;
+    }
     navigate("/menu");
   };
 
   return (
     <Fragment>
       <MenuScreen>
-        {menuItemSelected && <GenericItemSelected itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
+        {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
         <div id="left" className={classnames("w-[45%] h-full flex flex-col absolute z-20 left-0")}>
           <InformationBar currentScreen="Music" dark_line />
           <OptionsMapper options={menu_data.menu_options} currentIndex={currentIndex} />

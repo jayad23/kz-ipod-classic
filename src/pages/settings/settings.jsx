@@ -9,7 +9,7 @@ import OptionsMapper from "../../components/options.mapper";
 import MenuScreen from "../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../components/random-floating-image";
 import InformationBar from "../../components/information-bar/information-bar";
-import GenericItemSelected from "../../components/item-selected/generic-item-selected";
+import ItemSelected from "../../components/item-selected/item-selected";
 
 const Settings = () => {
   const {
@@ -31,7 +31,7 @@ const Settings = () => {
   return (
     <Fragment>
       <MenuScreen>
-        {itemSelected && <GenericItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />}
+        {itemSelected && (<ItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />)}
         {confirmExit && (
           <ConfirmationModal
             confirm_options={confirm_options}

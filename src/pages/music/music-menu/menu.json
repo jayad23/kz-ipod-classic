@@ -7,23 +7,15 @@
     },
     {
       "id": 1,
-      "title": "Playlists",
-      "route": "/playlists"
+      "title": "Playlists"
     },
     {
       "id": 2,
-      "title": "Artists",
-      "route": "/artists"
+      "title": "Artists"
     },
     {
       "id": 3,
-      "title": "Albums",
-      "route": "/albums"
-    },
-    {
-      "id": 4,
-      "title": "Songs",
-      "route": "/songs"
+      "title": "Songs"
     }
   ]
 }
