@@ -6,7 +6,7 @@ import SmartImageDisplay from "./smart-image-displayer";
 const SongInformation = ({ songName }) => {
   return (
     <div
-      className={classnames("absolute top-[17px] w-full p-3 flex")}
+      className={classnames("absolute top-[17px] w-full p-3 flex justify-center items-center")}
       style={{ perspective: "340px" }}
     >
       <SmartImageDisplay

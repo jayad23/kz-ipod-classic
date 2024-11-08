@@ -14,6 +14,7 @@ import Wheel from '../../components/wheel/wheel';
 import { usePlayer } from './use-player';
 import SmartImageDisplay from './smart-image-displayer';
 import SongInformation from "./song-information";
+import OtherOptions from "./other/other-options";
 
 const Player = () => {
   const {
@@ -38,7 +39,7 @@ const Player = () => {
             />
           )
         }
-
+        <OtherOptions />
       </MenuScreen>
       <Wheel
         prev={{

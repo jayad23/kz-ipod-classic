@@ -15,3 +15,33 @@
     transform: translateX(-120%);
   }
 }
+
+.neon_button {
+  animation: circling-shadow 6s linear infinite;
+}
+
+.neon_button:active {
+  animation: none;
+  box-shadow: 0px 0px 3px rgba(245, 60, 60, 0.6);
+  border: 1px solid rgba(245, 60, 60, 0.6);
+  transform: scale(0.95);
+  transform-origin: center;
+}
+
+@keyframes circling-shadow {
+  0% {
+    box-shadow: 0px 4px 4px rgba(245, 60, 60, 0.6);
+  }
+  25% {
+    box-shadow: 4px 0px 4px rgba(245, 60, 60, 0.6);
+  }
+  50% {
+    box-shadow: 0px -4px 4px rgba(245, 60, 60, 0.6);
+  }
+  75% {
+    box-shadow: -4px 0px 4px rgba(245, 60, 60, 0.6);
+  }
+  100% {
+    box-shadow: 0px 4px 4px rgba(245, 60, 60, 0.6);
+  }
+}
