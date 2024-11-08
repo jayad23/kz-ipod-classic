@@ -15,11 +15,12 @@ import { usePlayer } from './use-player';
 import SmartImageDisplay from './smart-image-displayer';
 import SongInformation from "./song-information";
 import OtherOptions from "./other/other-options";
+import ProgressBar from "./progress-bar";
 
 const Player = () => {
   const {
-    data,
     isLoading,
+    currentSong,
     currentIndex,
     handleButtonMenu,
     menuItemSelected,
@@ -33,12 +34,13 @@ const Player = () => {
         {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
         <InformationBar currentScreen="" dark_line />
         {
-          data && (
+          currentSong && (
             <SongInformation
-              songName={songName}
+              {...currentSong}
             />
           )
         }
+        <ProgressBar />
         <OtherOptions />
       </MenuScreen>
       <Wheel

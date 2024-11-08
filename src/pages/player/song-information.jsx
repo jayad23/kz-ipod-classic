@@ -3,15 +3,15 @@ import classnames from "classnames";
 import SmartImageDisplay from "./smart-image-displayer";
 
 
-const SongInformation = ({ songName }) => {
+const SongInformation = ({ songName, artist, img, playlistName }) => {
   return (
     <div
       className={classnames("absolute top-[17px] w-full p-3 flex justify-center items-center")}
       style={{ perspective: "340px" }}
     >
       <SmartImageDisplay
-        currentSongName={"Show me how to live"}
-        currentSongImage={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYld7Mgfdya4T8IX6z0fuW226WqCb33EsI6w&s"}
+        currentSongImage={img}
+        currentSongName={songName}
       />
       <div className="w-1/2 ml-2 pt-7 flex flex-col overflow-hidden">
         <span
@@ -26,14 +26,14 @@ const SongInformation = ({ songName }) => {
             classnames("text-slate-600 text-[12px] font-semibold", "span-title")
           }
         >
-          AudioSlave
+          {artist}
         </span>
         <span
           className={
             classnames("text-slate-600 text-[12px] font-semibold", "span-title")
           }
         >
-          Rock on 🚀
+          {playlistName}
         </span>
         <span
           className={

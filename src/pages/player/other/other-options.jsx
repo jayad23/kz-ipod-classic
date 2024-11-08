@@ -2,7 +2,7 @@ import "../player.css";
 import classnames from "classnames";
 import { Karaoke } from "../../../assets/icons/karaoke";
 
-const generic = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md";
+const generic = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md ";
 
 const OtherOptions = () => {
   return (

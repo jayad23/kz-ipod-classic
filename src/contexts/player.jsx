@@ -7,7 +7,8 @@ const initialState = {
   isPlaying: false,
   albums: [],
   currentCollection: [],
-  currentSong: {}
+  currentSong: null,
+  duration: 0
 };
 
 const PlayerContext = createContext(initialState);
@@ -25,6 +26,27 @@ const playerReducer = (state, action) => {
         ...state,
         albums: action.payload,
       };
+
+    case "SET_CURRENT_COLLECTION":
+      return {
+        ...state,
+        currentCollection: action.payload,
+        currentSong: action.payload[0]
+      };
+
+    case "SET_CURRENT_SONG":
+      return {
+        ...state,
+        currentSong: action.payload,
+        duration: 0
+      };
+
+    case "SET_DURATION":
+      return {
+        ...state,
+        duration: action.payload,
+      };
+
     default:
       return state;
   }
@@ -32,8 +54,8 @@ const playerReducer = (state, action) => {
 
 const PlayerProvider = ({ children }) => {
   const [statePlay, dispatchPlay] = useReducer(playerReducer, initialState);
-  //const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
-  const data = null;
+  const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
+  //const data = null;
 
   useEffect(() => {
     if (data) {
@@ -53,8 +75,8 @@ const PlayerProvider = ({ children }) => {
   return (
     <PlayerContext.Provider value={payload}>
       <PlayerScreen
-        url="https://www.youtube.com/watch?v=vVXIK1xCRpY"
-        isPlaying={statePlay.isPlaying}
+        {...statePlay}
+        dispatchPlay={dispatchPlay}
       />
       {children}
     </PlayerContext.Provider>

@@ -1,6 +1,8 @@
 //import { useContext } from "react";
 import classnames from "classnames";
+import { useContext } from "react";
 import ReactPlayer from "react-player";
+import { AppearanceContext } from "../../contexts/appearance";
 // import { PlayerContext } from "../../contexts/player";
 // import { AppearanceContext } from "../../contexts/appearance";
 
@@ -15,19 +17,32 @@ const onReturnScreenDimensions = (dimensions) => {
   }
 };
 
-const PlayerScreen = ({ url = "https://www.youtube.com/watch?v=jdYJf_ybyVo", size = "wide", isPlaying = false }) => {
-  // const { statePlay } = useContext(PlayerContext);
-  // const { dimensions } = useContext(AppearanceContext);
+const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay }) => {
+  const { dimensions } = useContext(AppearanceContext);
+
+  const afterCurrentSongEnds = () => {
+    if (currentCollection && currentCollection.length > 1) {
+      const prevIndex = currentSong.index + 1;
+      const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
+      dispatchPlay({ type: "SET_CURRENT_SONG", payload: currentCollection[nextIndex] });
+    }
+  };
+
+  const onCaptureVideoDuration = (duration) => {
+    dispatchPlay({ type: "SET_DURATION", payload: duration });
+  };
 
   return (
-    <div className={classnames(onReturnScreenDimensions(size), "hidden")}>
+    <div className={classnames(onReturnScreenDimensions(dimensions.size), "hidden")}>
       <ReactPlayer
         controls
-        url={url}
         width="0%"
         height="0%"
         playing={isPlaying}
         className="react-player"
+        url={currentSong?.videoUrl}
+        onEnded={afterCurrentSongEnds}
+        onDuration={onCaptureVideoDuration}
       />
     </div>
   );
