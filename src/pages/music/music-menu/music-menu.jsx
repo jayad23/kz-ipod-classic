@@ -23,6 +23,16 @@ const MusicMenu = () => {
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
+  const navigateWithTransition = (url) => {
+    const left = document.getElementById("left");
+    left.classList.add("open-left-animation");
+    const right = document.getElementById("right");
+    right.classList.add("open-right-animation");
+    setTimeout(() => {
+      navigate(url);
+    }, 425);
+  };
+
   const handleNext = () => {
     if (menuItemSelected) {
       const loopedThroughValues = menuItemSelected.values;
@@ -48,22 +58,15 @@ const MusicMenu = () => {
     if (menuItemSelected) {
       // MAKING A SELECTION UPON THE ITEM SELECTED
       const itemSelected = menuItemSelected.values[currentItemSelectedIndex];
-
       if (menuItemSelected.title === "Playlists") {
-        navigate(`/music/playlist/${itemSelected.uid}`);
+        navigateWithTransition(`/music/player/${itemSelected.uid}`);
         return;
       }
       return;
     }
 
     if (menu_item_selected && menu_item_selected.id === 0) {
-      const left = document.getElementById("left");
-      left.classList.add("open-left-animation");
-      const right = document.getElementById("right");
-      right.classList.add("open-right-animation");
-      setTimeout(() => {
-        navigate("/music/cover-flow");
-      }, 425);
+      navigateWithTransition("/music/cover-flow");
       return;
     } else if (menu_item_selected && menu_item_selected.id === 1) {
       const payload = {
