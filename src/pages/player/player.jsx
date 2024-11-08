@@ -18,6 +18,7 @@ const Player = () => {
     currentIndex,
     handleButtonMenu,
     menuItemSelected,
+    handlePlayButton,
     currentItemSelectedIndex,
   } = usePlayer();
 
@@ -26,6 +27,11 @@ const Player = () => {
       <MenuScreen>
         {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
         <InformationBar currentScreen={data?.data?.name || "Loading information..."} dark_line />
+        <div
+          className={classnames("absolute top-[17px] w-full h-full")}
+        >
+          information about the song and playlist
+        </div>
       </MenuScreen>
       <Wheel
         prev={{
@@ -45,7 +51,8 @@ const Player = () => {
           onClick: () => { }
         }}
         play={{
-          disabled: true
+          disabled: false,
+          onClick: handlePlayButton,
         }}
       />
     </Fragment>

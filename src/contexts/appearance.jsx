@@ -48,11 +48,22 @@ const reducerFunction = (state, action) => {
           ...action.payload
         }
       };
-    case "SET_THEME":
-      localStorage.setItem("ipod_theme", JSON.stringify(state));
-      return {
+    case "SET_THEME": {
+      const updated = {
         ...state,
+        theme: {
+          ...state.theme,
+          name: "custom"
+        },
+        dimensions: {
+          ...state.dimensions,
+        }
       };
+      localStorage.setItem("ipod_theme", JSON.stringify(updated));
+      return {
+        ...updated
+      };
+    }
     case "RESET_THEME":
       localStorage.removeItem("ipod_theme");
       return {

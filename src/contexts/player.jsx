@@ -1,10 +1,13 @@
 import { createContext, useEffect, useReducer } from "react";
 import { onFetcher } from "../api/fetcher";
 import { useQuery } from "@tanstack/react-query";
+import PlayerScreen from "../components/player-screen/player-screen";
 
 const initialState = {
   isPlaying: false,
-  albums: []
+  albums: [],
+  currentCollection: [],
+  currentSong: {}
 };
 
 const PlayerContext = createContext(initialState);
@@ -41,11 +44,16 @@ const PlayerProvider = ({ children }) => {
   const payload = {
     statePlay,
     albums: statePlay.albums,
+    currentCollection: statePlay.currentCollection,
+    currentSong: statePlay.currentSong,
     dispatchPlay,
   };
 
   return (
     <PlayerContext.Provider value={payload}>
+      <PlayerScreen
+        isPlaying={statePlay.isPlaying}
+      />
       {children}
     </PlayerContext.Provider>
   );
