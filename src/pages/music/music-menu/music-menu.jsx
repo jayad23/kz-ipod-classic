@@ -44,13 +44,25 @@ const MusicMenu = () => {
 
   const handleCenterButton = () => {
     const menu_item_selected = menu_data.menu_options[currentIndex];
+
+    if (menuItemSelected) {
+      // MAKING A SELECTION UPON THE ITEM SELECTED
+      const itemSelected = menuItemSelected.values[currentItemSelectedIndex];
+
+      if (menuItemSelected.title === "Playlists") {
+        navigate(`/music/playlist/${itemSelected.uid}`);
+        return;
+      }
+      return;
+    }
+
     if (menu_item_selected && menu_item_selected.id === 0) {
       const left = document.getElementById("left");
       left.classList.add("open-left-animation");
       const right = document.getElementById("right");
       right.classList.add("open-right-animation");
       setTimeout(() => {
-        navigate(`/music${menu_item_selected.route}`);
+        navigate("/music/cover-flow");
       }, 425);
       return;
     } else if (menu_item_selected && menu_item_selected.id === 1) {
@@ -76,6 +88,23 @@ const MusicMenu = () => {
           continue;
         }
       };
+
+      const payload = {
+        title: menu_item_selected?.title,
+        sub_title: `${values.length} ${menu_item_selected?.title}`,
+        photo_url: "",
+        values: values
+      };
+      setMenuItemSelected(payload);
+      return;
+    } else if (menu_item_selected && menu_item_selected.id === 3) {
+      const vals = [];
+
+      for (const album of albums) {
+        vals.push(...album.songs);
+      }
+
+      const values = vals.map((song) => ({ ...song, label: song.songName }));
 
       const payload = {
         title: menu_item_selected?.title,
