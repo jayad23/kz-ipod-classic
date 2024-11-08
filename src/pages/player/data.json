@@ -1,0 +1,101 @@
+{
+  "status": "success",
+  "data": {
+    "thumbnail": "https://cdns-images.dzcdn.net/images/cover/c04bb27e786e851ab9c8f20cfdadd446/0x1900-000000-80-0-0.jpg",
+    "id": "06e0b2c7-35ab-4e9a-8419-6d08ba1372e0",
+    "author": "iamkikevanegas",
+    "songs": [
+      {
+        "videoUrl": "https://www.youtube.com/watch?v=FQSZWAStqcY",
+        "songName": "Scorpions - Believe In Love",
+        "id": "963d6819-c86a-46a8-82c5-00b0fb1164e4",
+        "lyrics": "",
+        "mp364": "",
+        "timesPlayed": 1,
+        "artist": "Scorpions",
+        "img": "https://i.pinimg.com/236x/c9/85/71/c98571aa77b34adb8cd86e65535a3c01.jpg"
+      },
+      {
+        "id": "66fd9c57-98e5-4810-a93d-bc5092d9f8e1",
+        "mp364": "",
+        "timesPlayed": 1,
+        "lyrics": "",
+        "img": "https://upload.wikimedia.org/wikipedia/en/c/cf/Audioslave_like_a_stone.png",
+        "videoUrl": "https://www.youtube.com/watch?v=vVXIK1xCRpY",
+        "artist": "Audioslave",
+        "songName": "Audioslave - Show Me How to Live"
+      },
+      {
+        "songName": "Metallica - For Whom The Bell Tolls",
+        "mp364": "",
+        "artist": "Metallica",
+        "img": "https://facts.net/wp-content/uploads/2023/07/20-facts-about-metallica-1689075581.jpg",
+        "id": "4eea96ed-7654-47a8-9114-4f972d6ca968",
+        "videoUrl": "https://www.youtube.com/watch?v=B_HSa1dEL9s",
+        "lyrics": "",
+        "timesPlayed": 1
+      },
+      {
+        "songName": "Metallica - Whiskey in the jar",
+        "mp364": "",
+        "id": "44a863b7-c3ee-4cb2-a55d-3dce70c04bea",
+        "timesPlayed": 1,
+        "artist": "Metallica",
+        "lyrics": "",
+        "img": "https://facts.net/wp-content/uploads/2023/07/20-facts-about-metallica-1689075581.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=OIh3nO6-V_A"
+      },
+      {
+        "timesPlayed": 1,
+        "id": "2eba4d14-8d7a-41a5-9f5c-99931158b856",
+        "lyrics": "",
+        "artist": "Metallica",
+        "img": "https://facts.net/wp-content/uploads/2023/07/20-facts-about-metallica-1689075581.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=TpohVYomw2o",
+        "songName": "Metallica - Sad But True",
+        "mp364": ""
+      },
+      {
+        "img": "https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/440284/6fddd99b55a9bd56017fe9bf444817967aacc824/original/unnamed.jpg/!!/b%3AW1sicmVzaXplIixbNjAwLG51bGwseyJ3aXRob3V0RW5sYXJnZW1lbnQiOnRydWUsImZpdCI6Im91dHNpZGUifV1dXQ%3D%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+        "mp364": "",
+        "timesPlayed": 1,
+        "id": "e44de32e-b806-4f20-84d7-3bc64f9fe436",
+        "lyrics": "",
+        "artist": "The Outfield",
+        "videoUrl": "https://www.youtube.com/watch?v=4N1iwQxiHrs",
+        "songName": "The Outfield - Your Love"
+      },
+      {
+        "img": "https://i.pinimg.com/236x/c9/85/71/c98571aa77b34adb8cd86e65535a3c01.jpg",
+        "artist": "Scorpions",
+        "mp364": "",
+        "id": "10b426f4-2140-4e0b-9998-33831df68661",
+        "videoUrl": "https://www.youtube.com/watch?v=Zs5NOrYYV2s",
+        "songName": "Scorpions - Sails Of Charon",
+        "timesPlayed": 1,
+        "lyrics": ""
+      },
+      {
+        "timesPlayed": 1,
+        "lyrics": "",
+        "videoUrl": "https://www.youtube.com/watch?v=Rbm6GXllBiw",
+        "img": "https://scpr.brightspotcdn.com/dims4/default/0edc928/2147483647/strip/true/crop/640x583+0+0/resize/880x802!/quality/90/?url=http%3A%2F%2Fscpr-brightspot.s3.us-west-2.amazonaws.com%2Flegacy%2Fi%2Fd209ed114d5699684f140f7910a0a07d%2F5b2c36474488b300092713af-original.jpg",
+        "artist": "Guns & Roses",
+        "mp364": "",
+        "id": "4dfb1243-dfbf-46df-adeb-45a2f15c906f",
+        "songName": "Guns & Roses - Paradise City"
+      },
+      {
+        "songName": "Scorpions - Still Loving You",
+        "timesPlayed": 1,
+        "lyrics": "",
+        "id": "fb1731e7-cb65-4625-a8ee-a0d99ba4df96",
+        "artist": "Scorpions",
+        "img": "https://i.pinimg.com/236x/c9/85/71/c98571aa77b34adb8cd86e65535a3c01.jpg",
+        "mp364": "",
+        "videoUrl": "https://www.youtube.com/watch?v=CjRas1yOWvo"
+      }
+    ],
+    "name": "Rock on 🚀"
+  }
+}

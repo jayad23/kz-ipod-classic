@@ -32,7 +32,8 @@ const playerReducer = (state, action) => {
 
 const PlayerProvider = ({ children }) => {
   const [statePlay, dispatchPlay] = useReducer(playerReducer, initialState);
-  const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
+  //const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
+  const data = null;
 
   useEffect(() => {
     if (data) {
@@ -52,6 +53,7 @@ const PlayerProvider = ({ children }) => {
   return (
     <PlayerContext.Provider value={payload}>
       <PlayerScreen
+        url="https://www.youtube.com/watch?v=vVXIK1xCRpY"
         isPlaying={statePlay.isPlaying}
       />
       {children}

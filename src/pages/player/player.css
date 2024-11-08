@@ -1,0 +1,17 @@
+.song_name {
+  /* overflow: hidden; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+  animation: scroll-text 8s linear infinite;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
+}

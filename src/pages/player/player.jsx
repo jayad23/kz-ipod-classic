@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
+import "./player.css";
 import React, { Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classnames from "classnames";
+import { motion } from 'framer-motion';
 import MenuScreen from '../../components/screen/with-menu/menu-screen';
 import { getSongsImages } from '../../utils/get-only-images';
 import RandomFloatingImage from '../../components/random-floating-image';
@@ -10,6 +12,8 @@ import InformationBar from '../../components/information-bar/information-bar';
 import OptionsMapper from '../../components/options.mapper';
 import Wheel from '../../components/wheel/wheel';
 import { usePlayer } from './use-player';
+import SmartImageDisplay from './smart-image-displayer';
+import SongInformation from "./song-information";
 
 const Player = () => {
   const {
@@ -21,17 +25,20 @@ const Player = () => {
     handlePlayButton,
     currentItemSelectedIndex,
   } = usePlayer();
-
+  const songName = "Show me how to live";
   return (
     <Fragment>
       <MenuScreen>
         {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
-        <InformationBar currentScreen={data?.data?.name || "Loading information..."} dark_line />
-        <div
-          className={classnames("absolute top-[17px] w-full h-full")}
-        >
-          information about the song and playlist
-        </div>
+        <InformationBar currentScreen="" dark_line />
+        {
+          data && (
+            <SongInformation
+              songName={songName}
+            />
+          )
+        }
+
       </MenuScreen>
       <Wheel
         prev={{

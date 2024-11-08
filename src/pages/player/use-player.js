@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
 import { getOnlyImages } from "../../utils/get-only-images";
 import { PlayerContext } from "../../contexts/player";
+import mockData from "./data.json";
 
 export const usePlayer = () => {
   const { dispatchPlay } = useContext(PlayerContext);
@@ -12,10 +13,10 @@ export const usePlayer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["playlist.selected"],
-    queryFn: async () => onFetcher(`/music/playlists/${id}`),
-  });
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["playlist.selected"],
+  //   queryFn: async () => onFetcher(`/music/playlists/${id}`),
+  // });
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState(null);
@@ -30,8 +31,8 @@ export const usePlayer = () => {
   };
 
   return {
-    data,
-    isLoading,
+    data: mockData,
+    isLoading: false,
     currentIndex,
     handleButtonMenu,
     menuItemSelected,
