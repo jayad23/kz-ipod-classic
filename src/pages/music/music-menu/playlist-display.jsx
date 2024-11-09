@@ -1,10 +1,9 @@
-
+import { AnimatePresence, motion } from "framer-motion";
 import classnames from "classnames";
 import { useEffect, useRef } from "react";
+import { textEllipsis } from "../../../utils/text-ellipsis";
 
 const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
-  console.log(itemSelected);
-
   const itemRef = useRef([]);
 
   useEffect(() => {
@@ -17,46 +16,50 @@ const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
   }, [currentIndex]);
 
   return (
-    <div
-      className="absolute w-full flex flex-col top-0 bg-white z-30"
-    >
-      {
-        itemSelected?.values.map((item) => (
+    <AnimatePresence>
+      <motion.div
+        className="absolute w-full flex flex-col top-0 bg-white z-30"
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '-100%' }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      >
+        {itemSelected?.values.map((item, index) => (
           <div
-            ref={(el) => (itemRef.current[item.id - 1] = el)}
-            className={classnames("flex items-center", {
-              ["item-selected"]: item.id - 1 === currentIndex,
+            ref={(el) => (itemRef.current[index] = el)}
+            className={classnames("flex", {
+              ["item-selected"]: index === currentIndex,
             })}
-            key={item.uid}
+            key={item.id}
           >
-            <div className="w-[3.5rem] h-[3.5rem]">
+            <div className="w-[4rem] h-[3rem]">
               <img
                 className="w-full h-full object-cover"
-                src={item?.thumbnail}
+                src={item?.thumbnail || item?.img}
                 alt={item?.label}
               />
             </div>
             <div
-              style={{ padding: "0px 10px " }}
+              style={{ padding: "0px 10px", width: "100%" }}
               className="flex flex-col"
             >
               <div
-                style={{ color: item.id - 1 === currentIndex ? "white" : "" }}
-                className={classnames("text-[1rem] text-slate-800 font-bold")}
+                style={{ color: index === currentIndex ? "white" : "" }}
+                className={classnames("text-[0.85rem] text-slate-800 font-bold")}
               >
-                {item?.album_title}
+                {textEllipsis(item?.album_title || item?.label, 30)}
               </div>
               <div
-                style={{ color: item.id - 1 === currentIndex ? "white" : "" }}
-                className={classnames("text-[0.8rem] text-slate-800 font-semibold")}
+                style={{ color: index === currentIndex ? "white" : "" }}
+                className={classnames("text-[0.8rem] text-slate-800")}
               >
                 {item?.author || item?.artist}
               </div>
             </div>
           </div>
-        ))
-      }
-    </div>
+        ))}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
