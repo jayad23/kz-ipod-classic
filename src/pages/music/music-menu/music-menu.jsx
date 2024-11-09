@@ -3,13 +3,13 @@ import { Fragment, useState, useContext } from "react";
 import menu_data from "./menu.json";
 import classnames from "classnames";
 import { useNavigate } from "react-router-dom";
+import PlaylistDisplay from "./playlist-display";
 import Wheel from "../../../components/wheel/wheel";
+import { PlayerContext } from "../../../contexts/player";
 import OptionsMapper from "../../../components/options.mapper";
 import MenuScreen from "../../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../../components/random-floating-image";
 import InformationBar from "../../../components/information-bar/information-bar";
-import { PlayerContext } from "../../../contexts/player";
-import ItemSelected from "../../../components/item-selected/item-selected";
 
 const getOnlyImages = (albums) => {
   const images = albums.map((album) => album.cover);
@@ -132,7 +132,15 @@ const MusicMenu = () => {
   return (
     <Fragment>
       <MenuScreen>
-        {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
+        {/* {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />} */}
+        {
+          menuItemSelected && (
+            <PlaylistDisplay
+              itemSelected={menuItemSelected}
+              currentIndex={currentItemSelectedIndex}
+            />
+          )
+        }
         <div id="left" className={classnames("w-[45%] h-full flex flex-col absolute z-20 left-0")}>
           <InformationBar currentScreen="Music" dark_line />
           <OptionsMapper options={menu_data.menu_options} currentIndex={currentIndex} />
