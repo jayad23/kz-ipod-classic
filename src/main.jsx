@@ -4,6 +4,7 @@ import RouterApp from './router/router.app.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { PlayerProvider } from './contexts/player.jsx';
 import AppearanceProvider from './contexts/appearance.jsx';
+// Forcing new deployment
 import {
   QueryClient,
   QueryClientProvider,
