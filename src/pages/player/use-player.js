@@ -9,7 +9,8 @@ import mockData from "./data.json";
 
 const componentMounts = true;
 export const usePlayer = () => {
-  const { dispatchPlay, currentSong } = useContext(PlayerContext);
+  const { dispatchPlay, currentSong, currentCollection } =
+    useContext(PlayerContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -30,9 +31,34 @@ export const usePlayer = () => {
     dispatchPlay({ type: "PLAY_PAUSE" });
   };
 
+  const handleNextButton = () => {
+    if (currentCollection && currentCollection.length > 1) {
+      const prevIndex = currentSong.index + 1;
+      const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
+      if (nextIndex === 0) {
+        dispatchPlay({ type: "PLAY_PAUSE" });
+        return;
+      }
+      dispatchPlay({
+        type: "SET_CURRENT_SONG",
+        payload: currentCollection[nextIndex],
+      });
+    }
+  };
+
+  const handlePrevButton = () => {
+    if (currentCollection && currentCollection.length > 1) {
+      const prevIndex = currentSong.index;
+      const nextIndex = prevIndex > 0 ? prevIndex - 1 : prevIndex;
+      dispatchPlay({
+        type: "SET_CURRENT_SONG",
+        payload: currentCollection[nextIndex],
+      });
+    }
+  };
+
   useEffect(() => {
     if (data && componentMounts) {
-      console.log("component Mounts");
       dispatchPlay({
         type: "SET_CURRENT_COLLECTION",
         payload: data.data.songs,
@@ -49,6 +75,8 @@ export const usePlayer = () => {
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
+    handleNextButton,
+    handlePrevButton,
     currentItemSelectedIndex,
   };
 };

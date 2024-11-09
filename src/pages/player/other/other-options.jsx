@@ -36,7 +36,7 @@ const OtherOptions = () => {
           classnames(generic, "neon_button")
         }
       >
-        <Karaoke color="#ff6739" />
+        <Karaoke color="rgb(96 165 250 / var(--tw-bg-opacity))" />
       </button>
     </div>
   );

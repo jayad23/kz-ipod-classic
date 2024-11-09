@@ -19,15 +19,18 @@ import ProgressBar from "./progress-bar";
 
 const Player = () => {
   const {
+    data,
     isLoading,
     currentSong,
     currentIndex,
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
+    handleNextButton,
+    handlePrevButton,
     currentItemSelectedIndex,
   } = usePlayer();
-  const songName = "Show me how to live";
+
   return (
     <Fragment>
       <MenuScreen>
@@ -37,6 +40,7 @@ const Player = () => {
           currentSong && (
             <SongInformation
               {...currentSong}
+              total={data?.data?.songs?.length}
             />
           )
         }
@@ -46,11 +50,11 @@ const Player = () => {
       <Wheel
         prev={{
           disabled: false,
-          onClick: () => { },
+          onClick: handlePrevButton,
         }}
         next={{
           disabled: false,
-          onClick: () => { }
+          onClick: handleNextButton,
         }}
         menu={{
           disabled: false,

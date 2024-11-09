@@ -3,7 +3,7 @@ import classnames from "classnames";
 import SmartImageDisplay from "./smart-image-displayer";
 
 
-const SongInformation = ({ songName, artist, img, playlistName }) => {
+const SongInformation = ({ songName, artist, img, playlistName, index, total }) => {
   return (
     <div
       className={classnames("absolute top-[17px] w-full p-3 flex justify-center items-center")}
@@ -30,17 +30,25 @@ const SongInformation = ({ songName, artist, img, playlistName }) => {
         </span>
         <span
           className={
-            classnames("text-slate-600 text-[12px] font-semibold", "span-title")
+            classnames("text-slate-600 text-[10px] mt-1/2 font-semibold", "span-title")
           }
         >
           {playlistName}
         </span>
         <span
           className={
-            classnames("text-slate-600 text-[10px] font-bold mt-2", "span-title")
+            classnames("text-slate-600 text-[10px] font-bold mt-3", "span-title")
           }
         >
-          1 of 23
+          {index + 1} of {total}
+        </span>
+        <span
+          className={
+            classnames("text-slate-600 text-[8px] font-semibold", "span-title")
+          }
+        >
+
+          Developed by Kz
         </span>
       </div>
     </div>

@@ -24,6 +24,10 @@ const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay 
     if (currentCollection && currentCollection.length > 1) {
       const prevIndex = currentSong.index + 1;
       const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
+      if (nextIndex === 0) {
+        dispatchPlay({ type: "PLAY_PAUSE" });
+        return;
+      }
       dispatchPlay({ type: "SET_CURRENT_SONG", payload: currentCollection[nextIndex] });
     }
   };
