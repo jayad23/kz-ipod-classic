@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import classnames from "classnames";
 import { useEffect, useRef } from "react";
 import { textEllipsis } from "../../../utils/text-ellipsis";
+import InformationBar from "../../../components/information-bar/information-bar";
 
 const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
   const itemRef = useRef([]);
@@ -18,19 +19,21 @@ const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="absolute w-full flex flex-col top-0 bg-white z-30"
+        className="absolute w-full flex flex-col top-0 bg-white z-50"
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '-100%' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
+        <InformationBar currentScreen={itemSelected?.title} dark_line />
         {itemSelected?.values.map((item, index) => (
           <div
+            style={{ marginTop: index === 0 ? "18px" : "" }}
             ref={(el) => (itemRef.current[index] = el)}
             className={classnames("flex", {
-              ["item-selected"]: index === currentIndex,
+              ["item-selected"]: index === currentIndex
             })}
-            key={item.id}
+            key={`${item.id}-${index}`}
           >
             <div className="w-[4rem] h-[3rem]">
               <img
@@ -47,7 +50,7 @@ const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
                 style={{ color: index === currentIndex ? "white" : "" }}
                 className={classnames("text-[0.85rem] text-slate-800 font-bold")}
               >
-                {textEllipsis(item?.album_title || item?.label, 30)}
+                {textEllipsis(item?.album_title || item?.label || item?.songName, 30)}
               </div>
               <div
                 style={{ color: index === currentIndex ? "white" : "" }}

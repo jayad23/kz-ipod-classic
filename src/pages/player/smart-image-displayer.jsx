@@ -10,6 +10,7 @@ const SmartImageDisplay = ({ currentSongImage, currentSongName }) => {
     setTimeout(() => {
       setMounted(true);
     }, 500);
+
   }, []);
 
   return (

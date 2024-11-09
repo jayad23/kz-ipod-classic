@@ -1,43 +1,41 @@
-/* eslint-disable no-unused-vars */
-import "./player.css";
-import React, { Fragment, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import classnames from "classnames";
-import { motion } from 'framer-motion';
-import MenuScreen from '../../components/screen/with-menu/menu-screen';
-import { getSongsImages } from '../../utils/get-only-images';
-import RandomFloatingImage from '../../components/random-floating-image';
-import ItemSelected from '../../components/item-selected/item-selected';
-import InformationBar from '../../components/information-bar/information-bar';
-import OptionsMapper from '../../components/options.mapper';
-import Wheel from '../../components/wheel/wheel';
+
+import { Fragment } from 'react';
+import ProgressBar from "./progress-bar";
 import { usePlayer } from './use-player';
-import SmartImageDisplay from './smart-image-displayer';
+import Wheel from '../../components/wheel/wheel';
 import SongInformation from "./song-information";
 import OtherOptions from "./other/other-options";
-import ProgressBar from "./progress-bar";
+import PlaylistDisplay from "../music/music-menu/playlist-display";
+import MenuScreen from '../../components/screen/with-menu/menu-screen';
+import InformationBar from '../../components/information-bar/information-bar';
 
 const Player = () => {
   const {
     data,
-    isLoading,
     currentSong,
-    currentIndex,
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
     handleNextButton,
     handlePrevButton,
+    handleCenterButton,
     currentItemSelectedIndex,
   } = usePlayer();
 
   return (
     <Fragment>
       <MenuScreen>
-        {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />}
+        {
+          menuItemSelected && (
+            <PlaylistDisplay
+              itemSelected={menuItemSelected}
+              currentIndex={currentItemSelectedIndex}
+            />
+          )
+        }
         <InformationBar currentScreen="" dark_line />
         {
-          currentSong && (
+          currentSong && !menuItemSelected && (
             <SongInformation
               {...currentSong}
               total={data?.data?.songs?.length}
@@ -62,7 +60,7 @@ const Player = () => {
         }}
         centerButton={{
           disabled: false,
-          onClick: () => { }
+          onClick: handleCenterButton
         }}
         play={{
           disabled: false,

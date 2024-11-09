@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { onFetcher } from "../../api/fetcher";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
-import { getOnlyImages } from "../../utils/get-only-images";
 import { PlayerContext } from "../../contexts/player";
-import mockData from "./data.json";
 
 const componentMounts = true;
 export const usePlayer = () => {
@@ -19,19 +16,51 @@ export const usePlayer = () => {
     queryFn: async () => onFetcher(`/music/playlists/${id}`),
   });
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
   const handleButtonMenu = () => {
-    navigate(-1);
+    if (menuItemSelected) {
+      setMenuItemSelected(null);
+      setCurrentItemSelectedIndex(0);
+      navigate(-1);
+      return;
+    }
+    onShowPlaylistModal();
+  };
+
+  const handleCenterButton = () => {
+    if (menuItemSelected) {
+      const currentSongSelected = currentCollection[currentItemSelectedIndex];
+      dispatchPlay({
+        type: "SET_CURRENT_SONG",
+        payload: currentSongSelected,
+      });
+      setCurrentItemSelectedIndex(0);
+      setMenuItemSelected(null);
+      return;
+    }
   };
 
   const handlePlayButton = () => {
+    if (menuItemSelected) {
+      handleCenterButton();
+      return;
+    }
     dispatchPlay({ type: "PLAY_PAUSE" });
   };
 
   const handleNextButton = () => {
+    if (menuItemSelected) {
+      const possNextIndex = currentItemSelectedIndex + 1;
+      const nextIndex =
+        possNextIndex === menuItemSelected.values.length
+          ? currentItemSelectedIndex
+          : possNextIndex;
+      setCurrentItemSelectedIndex(nextIndex);
+      return;
+    }
+
     if (currentCollection && currentCollection.length > 1) {
       const prevIndex = currentSong.index + 1;
       const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
@@ -47,6 +76,15 @@ export const usePlayer = () => {
   };
 
   const handlePrevButton = () => {
+    if (menuItemSelected) {
+      const nextIndex =
+        currentItemSelectedIndex === 0
+          ? currentItemSelectedIndex
+          : currentItemSelectedIndex - 1;
+      setCurrentItemSelectedIndex(nextIndex);
+      return;
+    }
+
     if (currentCollection && currentCollection.length > 1) {
       const prevIndex = currentSong.index;
       const nextIndex = prevIndex > 0 ? prevIndex - 1 : prevIndex;
@@ -67,16 +105,26 @@ export const usePlayer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  const onShowPlaylistModal = () => {
+    const payload = {
+      title: currentSong.playlistName,
+      values: currentCollection,
+    };
+
+    setCurrentItemSelectedIndex(currentSong.index);
+    setMenuItemSelected(payload);
+  };
+
   return {
     data,
     isLoading,
     currentSong,
-    currentIndex,
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
     handleNextButton,
     handlePrevButton,
+    handleCenterButton,
     currentItemSelectedIndex,
   };
 };

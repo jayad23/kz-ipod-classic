@@ -1,4 +1,7 @@
 export const textEllipsis = (text, length) => {
-  if (text.length <= length) return text;
-  return text.slice(0, length) + "...";
+  if (text && text?.length <= length) return text;
+
+  let temp = text ? text : "";
+
+  return temp.slice(0, length) + "...";
 };

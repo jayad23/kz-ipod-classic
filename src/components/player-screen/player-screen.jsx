@@ -8,11 +8,8 @@ import { AppearanceContext } from "../../contexts/appearance";
 
 const onReturnScreenDimensions = (dimensions) => {
   if (dimensions === "wide") {
-    // the screen is big
-    //return "w-full h-[94%]";
     return "w-full h-[77%]";
   } else if (dimensions === "small") {
-    // the screen is small
     return "w-full h-[71%]";
   }
 };
