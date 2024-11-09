@@ -10,7 +10,7 @@ const WheelCircumference = ({ children }) => {
         background: theme.config.wheel,
         width: dimensions.circumference,
         height: dimensions.circumference,
-        marginTop: dimensions.marginTop
+        marginTop: dimensions.marginTop,
       }}
       className={classNames("ipod-wheel relative rounded-full mx-auto cursor-pointer overflow-hidden", "wheel-shadow")}
     >

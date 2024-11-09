@@ -1,12 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { albums } from "../../../assets/cover";
 import Wheel from "../../../components/wheel/wheel";
 import Screen from "../../../components/screen/screen";
 import ImageFlow from "../../../components/image-flow";
+import { PlayerContext } from "../../../contexts/player";
+import ItemSelected from "../../../components/item-selected/item-selected";
 
 const CoverFlow = () => {
   const navigate = useNavigate();
+  const { albums } = useContext(PlayerContext);
   const [direction, setDirection] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemSelected, setItemSelected] = useState(null);
@@ -34,7 +36,14 @@ const CoverFlow = () => {
   const handleCenterButton = () => {
     if (!itemSelected) {
       const currentAlbum = albums[currentIndex];
-      setItemSelected(currentAlbum);
+      const payload = {
+        ...currentAlbum,
+        title: currentAlbum.name,
+        sub_title: currentAlbum.author,
+        photo_url: currentAlbum.thumbnail,
+        values: currentAlbum.songs.map((song) => ({ ...song, label: song.songName })),
+      };
+      setItemSelected(payload);
     }
   };
 
@@ -51,9 +60,8 @@ const CoverFlow = () => {
     <Fragment>
       <Screen
         currentScreen="Cover Flow"
-        itemSelected={itemSelected}
-        currentSelectedIndex={currentItemSelectedIndex}
       >
+        {itemSelected && (<ItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />)}
         <ImageFlow
           albums={albums}
           direction={direction}
