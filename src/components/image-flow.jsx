@@ -65,7 +65,7 @@ function ImageFlow({ currentIndex, albums, direction }) {
                   WebkitBoxReflect: "below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))"
                 }}
               />
-              <AlbumTitle name={albums[album?.id - 1]?.name || ""} />
+              <AlbumTitle name={albums[album?.index - 1]?.artist || ""} />
             </motion.div>
           );
         })}

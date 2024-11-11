@@ -59,7 +59,7 @@ const MusicMenu = () => {
       // MAKING A SELECTION UPON THE ITEM SELECTED
       const itemSelected = menuItemSelected.values[currentItemSelectedIndex];
       if (menuItemSelected.title === "Playlists") {
-        navigateWithTransition(`/music/player/${itemSelected.uid}`);
+        navigateWithTransition(`/music/player/${itemSelected.id}`);
         return;
       }
       return;
@@ -132,7 +132,6 @@ const MusicMenu = () => {
   return (
     <Fragment>
       <MenuScreen>
-        {/* {menuItemSelected && <ItemSelected dark_bg itemSelected={menuItemSelected} currentIndex={currentItemSelectedIndex} />} */}
         {
           menuItemSelected && (
             <PlaylistDisplay
