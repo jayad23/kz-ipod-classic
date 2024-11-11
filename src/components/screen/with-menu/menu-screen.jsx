@@ -15,7 +15,6 @@ const MenuScreen = ({ children, bg = "bg-white" }) => {
         className={classnames("w-full flex items-center justify-center overflow-hidden relative border", bg)}
         style={{
           x,
-          //height: dimensions.size === "small" ? "250px" : "285px",
           height: dimensions.size === "small" ? "250px" : "300px",
         }}
       >
