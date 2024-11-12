@@ -19,6 +19,16 @@ export const usePlayer = () => {
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
+  const onShowPlaylistModal = () => {
+    const payload = {
+      title: currentSong.playlistName,
+      values: currentCollection,
+    };
+
+    setCurrentItemSelectedIndex(currentSong.index);
+    setMenuItemSelected(payload);
+  };
+
   const handleButtonMenu = () => {
     if (menuItemSelected) {
       setMenuItemSelected(null);
@@ -96,24 +106,16 @@ export const usePlayer = () => {
   };
 
   useEffect(() => {
-    if (data && componentMounts) {
+    const flag = true;
+    if (data && componentMounts && flag) {
+      const songs = data.data.songs;
       dispatchPlay({
         type: "SET_CURRENT_COLLECTION",
-        payload: data.data.songs,
+        payload: songs,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  const onShowPlaylistModal = () => {
-    const payload = {
-      title: currentSong.playlistName,
-      values: currentCollection,
-    };
-
-    setCurrentItemSelectedIndex(currentSong.index);
-    setMenuItemSelected(payload);
-  };
 
   return {
     data,

@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import ProgressBar from "./progress-bar";
 import { usePlayer } from './use-player';
 import Wheel from '../../components/wheel/wheel';
-import SongInformation from "./song-information";
+import CurrentSongPlaying from "./song-information";
 import OtherOptions from "./other/other-options";
 import PlaylistDisplay from "../music/music-menu/playlist-display";
 import MenuScreen from '../../components/screen/with-menu/menu-screen';
@@ -36,7 +36,7 @@ const Player = () => {
         <InformationBar currentScreen="" dark_line />
         {
           currentSong && !menuItemSelected && (
-            <SongInformation
+            <CurrentSongPlaying
               {...currentSong}
               total={data?.data?.songs?.length}
             />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import classnames from "classnames";
 import { PlayerContext } from '../../contexts/player';
 import { formatTime } from '../../utils/time-formatter';
@@ -8,27 +8,7 @@ const spanClasses = "text-slate-600 text-[10px] font-bold w-[40px] text-center";
 const ProgressBar = () => {
   const { statePlay } = useContext(PlayerContext);
 
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (!statePlay.isPlaying) return;
-    if (statePlay.duration === 0) {
-      setProgress(0);
-      return;
-    }
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress < statePlay.duration) {
-          return prevProgress + 1;
-        } else {
-          clearInterval(interval);
-          return prevProgress;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [statePlay.duration, statePlay.isPlaying]);
+  const progress = statePlay.loadedProgress;
 
   return (
     <div className="absolute bottom-[45px] w-full z-30 flex justify-between items-center">

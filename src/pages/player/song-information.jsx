@@ -3,7 +3,7 @@ import classnames from "classnames";
 import SmartImageDisplay from "./smart-image-displayer";
 
 
-const SongInformation = ({ songName, artist, img, playlistName, index, total }) => {
+const CurrentSongPlaying = ({ songName, artist, img, playlistName, index, total }) => {
   return (
     <div
       className={classnames("absolute top-[17px] w-full p-3 flex justify-center items-center")}
@@ -55,4 +55,4 @@ const SongInformation = ({ songName, artist, img, playlistName, index, total }) 
   );
 };
 
-export default SongInformation;
+export default CurrentSongPlaying;

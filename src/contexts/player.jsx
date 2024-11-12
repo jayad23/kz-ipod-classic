@@ -8,7 +8,8 @@ const initialState = {
   albums: [],
   currentCollection: [],
   currentSong: null,
-  duration: 0
+  duration: 0,
+  loadedProgress: 0,
 };
 
 const PlayerContext = createContext(initialState);
@@ -32,8 +33,8 @@ const playerReducer = (state, action) => {
         ...state,
         currentCollection: action.payload,
         currentSong: action.payload[0],
-        duration: 0,
-        isPlaying: true
+        //duration: 0,
+        //isPlaying: true
       };
 
     case "SET_CURRENT_SONG":
@@ -49,6 +50,12 @@ const playerReducer = (state, action) => {
         duration: action.payload,
       };
 
+    case "SET_LOADED_PROGRESS":
+      return {
+        ...state,
+        loadedProgress: action.payload,
+      };
+
     default:
       return state;
   }
@@ -57,7 +64,6 @@ const playerReducer = (state, action) => {
 const PlayerProvider = ({ children }) => {
   const [statePlay, dispatchPlay] = useReducer(playerReducer, initialState);
   const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
-  //const data = null;
 
   useEffect(() => {
     if (data) {

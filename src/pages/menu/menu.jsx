@@ -1,5 +1,5 @@
 
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import menu_data from "./menu.json";
 import classnames from "classnames";
 import { albums } from "../../assets/cover";
@@ -9,10 +9,12 @@ import OptionsMapper from "../../components/options.mapper";
 import MenuScreen from "../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../components/random-floating-image";
 import InformationBar from "../../components/information-bar/information-bar";
+import { PlayerContext } from "../../contexts/player";
 
 const images = albums.map((album) => album.cover);
 
 const Menu = () => {
+  const { statePlay } = useContext(PlayerContext);
   const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,6 +28,11 @@ const Menu = () => {
 
   const handleCenterButton = () => {
     const menu_item_selected = menu_data.menu_options[currentIndex];
+    if (menu_item_selected && menu_item_selected.id === 6) {
+      const current_song_id = statePlay.currentSong.id;
+      navigate(`/music/player/${current_song_id}`);
+      return;
+    }
     if (menu_item_selected) {
       navigate(menu_item_selected.route);
     }
