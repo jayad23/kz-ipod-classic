@@ -37,6 +37,7 @@ const playerReducer = (state, action) => {
     case "SET_CURRENT_SONG":
       return {
         ...state,
+        isPlaying: true,
         currentSong: action.payload,
       };
 
