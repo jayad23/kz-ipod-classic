@@ -44,7 +44,6 @@ const MusicMenu = () => {
   };
 
   const onManagerSelection = (id) => {
-    console.log(albums);
     if (id === "playlists") {
       const payload = {
         title: id.toUpperCase(),
@@ -99,7 +98,6 @@ const MusicMenu = () => {
 
   useEffect(() => {
     if (route_id) {
-      console.log('route_id', route_id);
       onManagerSelection(route_id);
       const last_index = localStorage.getItem("lastSelectedIndex");
       if (last_index) {

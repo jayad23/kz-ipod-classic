@@ -37,14 +37,12 @@ const PlaylistSelected = () => {
 
   const handleCenterButton = () => {
     const currentSongSelected = currentCollection[currentItemSelectedIndex];
-    console.log('currentSongSelected', currentSongSelected);
     dispatchPlay({
       type: "SET_CURRENT_SONG",
       payload: currentSongSelected,
     });
     navigate("/now-playing");
-    // setCurrentItemSelectedIndex(0);
-    // setMenuItemSelected(null);
+    localStorage.setItem("lastPlaylistSelectedIndex", currentItemSelectedIndex);
     return;
   };
 
@@ -114,7 +112,8 @@ const PlaylistSelected = () => {
         title: data.data.playlistName,
         values: songs,
       };
-      onShowPlaylistModal(payload, 0);
+      const last_index = Number(localStorage.getItem("lastPlaylistSelectedIndex"));
+      onShowPlaylistModal(payload, last_index);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

@@ -38,7 +38,6 @@ const playerReducer = (state, action) => {
       return {
         ...state,
         currentSong: action.payload,
-        duration: 0
       };
 
     case "SET_DURATION":
