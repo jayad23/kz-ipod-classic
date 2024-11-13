@@ -29,10 +29,8 @@ const PlaylistSelected = () => {
   };
 
   const handleButtonMenu = () => {
-    setMenuItemSelected(null);
-    setCurrentItemSelectedIndex(0);
+    localStorage.removeItem("lastPlaylistSelectedIndex");
     navigate(-1);
-    return;
   };
 
   const handleCenterButton = () => {
