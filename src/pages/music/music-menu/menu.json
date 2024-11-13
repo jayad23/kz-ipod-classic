@@ -3,19 +3,26 @@
     {
       "id": 0,
       "title": "Music Cover",
-      "route": "/cover-flow"
+      "route": "/cover-flow",
+      "hash_id": "?cover-flow"
     },
     {
       "id": 1,
-      "title": "Playlists"
+      "title": "Playlists",
+      "route": "/playlists",
+      "hash_id": "?playlist"
     },
     {
       "id": 2,
-      "title": "Artists"
+      "title": "Artists",
+      "route": "/artists",
+      "hash_id": "?artist"
     },
     {
       "id": 3,
-      "title": "Songs"
+      "title": "Songs",
+      "route": "/songs",
+      "hash_id": "?songs"
     }
   ]
 }

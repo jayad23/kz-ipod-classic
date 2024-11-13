@@ -53,7 +53,7 @@ const CoverFlow = () => {
       setCurrentItemSelectedIndex(0);
       return;
     }
-    navigate("/music");
+    navigate(-1);
   };
 
   return (
