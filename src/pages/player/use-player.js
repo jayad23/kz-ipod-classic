@@ -1,42 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { onFetcher } from "../../api/fetcher";
-import { useQuery } from "@tanstack/react-query";
-import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PlayerContext } from "../../contexts/player";
-
-const componentMounts = true;
 export const usePlayer = () => {
   const { dispatchPlay, currentSong, currentCollection } =
     useContext(PlayerContext);
-  const { id } = useParams();
-  const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery({
-    queryKey: [`playlist-${id}`],
-    queryFn: async () => onFetcher(`/music/playlists/${id}`),
-  });
+  const navigate = useNavigate();
 
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
-  const onShowPlaylistModal = () => {
-    const payload = {
-      title: currentSong.playlistName,
-      values: currentCollection,
-    };
-
-    setCurrentItemSelectedIndex(currentSong.index);
-    setMenuItemSelected(payload);
-  };
-
   const handleButtonMenu = () => {
-    if (menuItemSelected) {
-      setMenuItemSelected(null);
-      setCurrentItemSelectedIndex(0);
-      navigate(-1);
-      return;
-    }
-    onShowPlaylistModal();
+    navigate(-1);
   };
 
   const handleCenterButton = () => {
@@ -105,27 +80,14 @@ export const usePlayer = () => {
     }
   };
 
-  useEffect(() => {
-    const flag = true;
-    if (data && componentMounts && flag) {
-      const songs = data.data.songs;
-      dispatchPlay({
-        type: "SET_CURRENT_COLLECTION",
-        payload: songs,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
   return {
-    data,
-    isLoading,
     currentSong,
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
     handleNextButton,
     handlePrevButton,
+    currentCollection,
     handleCenterButton,
     currentItemSelectedIndex,
   };

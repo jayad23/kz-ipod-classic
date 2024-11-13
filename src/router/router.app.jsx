@@ -8,6 +8,7 @@ import CoverFlow from "../pages/music/cover-flow/cover-flow";
 import MusicMenu from "../pages/music/music-menu/music-menu";
 import PlaylistSelected from "../pages/music/playlists/selected";
 import MusicItemSelected from "../pages/music/music-menu/menu-item-selected";
+import NowPlaying from "../pages/player/player";
 //import AlbumSelected from "../pages/music/album-selected/album-selected";
 
 const RouterApp = () => {
@@ -21,6 +22,7 @@ const RouterApp = () => {
           <Route path="/music/:route_id" element={<MusicItemSelected />} />
           <Route path="settings" element={<Settings />} />
           <Route path="/music/playlists/playlist-selected/:id" element={<PlaylistSelected />} />
+          <Route path="/now-playing" element={<NowPlaying />} />
         </Route>
         <Route path="/" element={<Navigate to="/music" />} />
       </Routes>

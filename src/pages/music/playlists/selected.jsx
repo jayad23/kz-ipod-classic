@@ -29,30 +29,23 @@ const PlaylistSelected = () => {
   };
 
   const handleButtonMenu = () => {
-    if (menuItemSelected) {
-      setMenuItemSelected(null);
-      setCurrentItemSelectedIndex(0);
-      navigate(-1);
-      return;
-    }
-    const payload = {
-      title: currentSong.playlistName,
-      values: currentCollection,
-    };
-    onShowPlaylistModal(payload, currentSong.index);
+    setMenuItemSelected(null);
+    setCurrentItemSelectedIndex(0);
+    navigate(-1);
+    return;
   };
 
   const handleCenterButton = () => {
-    if (menuItemSelected) {
-      const currentSongSelected = currentCollection[currentItemSelectedIndex];
-      dispatchPlay({
-        type: "SET_CURRENT_SONG",
-        payload: currentSongSelected,
-      });
-      setCurrentItemSelectedIndex(0);
-      setMenuItemSelected(null);
-      return;
-    }
+    const currentSongSelected = currentCollection[currentItemSelectedIndex];
+    console.log('currentSongSelected', currentSongSelected);
+    dispatchPlay({
+      type: "SET_CURRENT_SONG",
+      payload: currentSongSelected,
+    });
+    navigate("/now-playing");
+    // setCurrentItemSelectedIndex(0);
+    // setMenuItemSelected(null);
+    return;
   };
 
   const handlePlayButton = () => {

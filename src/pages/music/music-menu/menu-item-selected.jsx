@@ -14,20 +14,16 @@ const MusicMenu = () => {
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
   const handleNext = () => {
-    if (menuItemSelected) {
-      const loopedThroughValues = menuItemSelected.values;
-      const nextIndex = currentItemSelectedIndex < loopedThroughValues.length - 1 ? currentItemSelectedIndex + 1 : currentItemSelectedIndex;
-      setCurrentItemSelectedIndex(nextIndex);
-      return;
-    }
+    const loopedThroughValues = menuItemSelected.values;
+    const nextIndex = currentItemSelectedIndex < loopedThroughValues.length - 1 ? currentItemSelectedIndex + 1 : currentItemSelectedIndex;
+    setCurrentItemSelectedIndex(nextIndex);
+    return;
   };
 
   const handlePrev = () => {
-    if (menuItemSelected) {
-      const prevIndex = currentItemSelectedIndex > 0 ? currentItemSelectedIndex - 1 : currentItemSelectedIndex;
-      setCurrentItemSelectedIndex(prevIndex);
-      return;
-    }
+    const prevIndex = currentItemSelectedIndex > 0 ? currentItemSelectedIndex - 1 : currentItemSelectedIndex;
+    setCurrentItemSelectedIndex(prevIndex);
+    return;
   };
 
   const handleCenterButton = () => {
@@ -48,6 +44,7 @@ const MusicMenu = () => {
   };
 
   const onManagerSelection = (id) => {
+    console.log(albums);
     if (id === "playlists") {
       const payload = {
         title: id.toUpperCase(),
@@ -102,6 +99,7 @@ const MusicMenu = () => {
 
   useEffect(() => {
     if (route_id) {
+      console.log('route_id', route_id);
       onManagerSelection(route_id);
       const last_index = localStorage.getItem("lastSelectedIndex");
       if (last_index) {
