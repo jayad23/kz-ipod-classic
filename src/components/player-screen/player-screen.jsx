@@ -14,14 +14,14 @@ const onReturnScreenDimensions = (dimensions) => {
   }
 };
 
-const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay }) => {
+const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay, loop }) => {
   const { dimensions } = useContext(AppearanceContext);
 
   const afterCurrentSongEnds = () => {
     if (currentCollection && currentCollection.length > 1) {
       const prevIndex = currentSong.index + 1;
       const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
-      if (nextIndex === 0) {
+      if (nextIndex === 0 && loop === "none") {
         dispatchPlay({ type: "PLAY_PAUSE" });
         return;
       }
@@ -48,6 +48,7 @@ const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay 
         width="0%"
         height="0%"
         playing={isPlaying}
+        loop={loop === "one"}
         //onPlay={onCapturePlay}
         className="react-player"
         url={currentSong?.videoUrl}

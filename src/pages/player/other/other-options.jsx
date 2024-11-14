@@ -4,7 +4,8 @@ import { Fragment, useState } from "react";
 import { Karaoke } from "../../../assets/icons/karaoke";
 import { ShuffleIcon } from "../../../assets/icons/shuffle";
 import KaraokeComponent from "../../../components/karaoke/karaoke";
-import { LoopThroughIcon } from "../../../assets/icons/loop-through";
+import RepeatManager from "./repeat-manager";
+
 
 const generic = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md ";
 
@@ -28,14 +29,7 @@ const OtherOptions = () => {
           >
             <ShuffleIcon color="#949494" />
           </button>
-
-          <button
-            className={
-              classnames(generic, "")
-            }
-          >
-            <LoopThroughIcon color="#949494" />
-          </button>
+          <RepeatManager />
           <button
             type="button"
             onClick={toggleKaraoke}

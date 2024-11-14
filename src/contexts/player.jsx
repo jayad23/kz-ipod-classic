@@ -10,6 +10,7 @@ const initialState = {
   currentSong: null,
   duration: 0,
   loadedProgress: 0,
+  loop: "none", //"none" | "all" | "one"
 };
 
 const PlayerContext = createContext(initialState);
@@ -51,6 +52,12 @@ const playerReducer = (state, action) => {
       return {
         ...state,
         loadedProgress: action.payload,
+      };
+
+    case "SET_LOOP":
+      return {
+        ...state,
+        loop: action.payload,
       };
 
     default:
