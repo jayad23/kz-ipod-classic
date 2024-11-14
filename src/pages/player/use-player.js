@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PlayerContext } from "../../contexts/player";
+import { getRandomIndex } from "../../utils/get-random-index";
 export const usePlayer = () => {
-  const { dispatchPlay, currentSong, currentCollection } =
+  const { dispatchPlay, currentSong, currentCollection, statePlay } =
     useContext(PlayerContext);
 
   const navigate = useNavigate();
@@ -47,16 +48,25 @@ export const usePlayer = () => {
     }
 
     if (currentCollection && currentCollection.length > 1) {
-      const prevIndex = currentSong.index + 1;
-      const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
-      if (nextIndex === 0) {
-        dispatchPlay({ type: "PLAY_PAUSE" });
-        return;
+      if (statePlay.shuffle) {
+        const nextIndex = getRandomIndex(currentCollection.length);
+        dispatchPlay({
+          type: "SET_CURRENT_SONG",
+          payload: currentCollection[nextIndex],
+        });
+      } else {
+        const prevIndex = currentSong.index + 1;
+        const nextIndex =
+          prevIndex === currentCollection.length ? 0 : prevIndex;
+        if (nextIndex === 0 && statePlay.loop === "none") {
+          dispatchPlay({ type: "PLAY_PAUSE" });
+          return;
+        }
+        dispatchPlay({
+          type: "SET_CURRENT_SONG",
+          payload: currentCollection[nextIndex],
+        });
       }
-      dispatchPlay({
-        type: "SET_CURRENT_SONG",
-        payload: currentCollection[nextIndex],
-      });
     }
   };
 

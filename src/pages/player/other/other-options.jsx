@@ -1,10 +1,10 @@
 import "../player.css";
 import classnames from "classnames";
 import { Fragment, useState } from "react";
-import { Karaoke } from "../../../assets/icons/karaoke";
-import { ShuffleIcon } from "../../../assets/icons/shuffle";
-import KaraokeComponent from "../../../components/karaoke/karaoke";
 import RepeatManager from "./repeat-manager";
+import ShuffleManager from "./shuffle-manager";
+import { Karaoke } from "../../../assets/icons/karaoke";
+import KaraokeComponent from "../../../components/karaoke/karaoke";
 
 
 const generic = "w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md ";
@@ -22,13 +22,7 @@ const OtherOptions = () => {
           style={{ padding: "0.5rem 15px" }}
           className="absolute bottom-0 w-full flex justify-center gap-5 backdrop-blur-sm"
         >
-          <button
-            className={
-              classnames(generic, "")
-            }
-          >
-            <ShuffleIcon color="#949494" />
-          </button>
+          <ShuffleManager />
           <RepeatManager />
           <button
             type="button"

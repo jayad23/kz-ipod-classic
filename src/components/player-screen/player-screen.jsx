@@ -1,10 +1,8 @@
-//import { useContext } from "react";
 import classnames from "classnames";
 import { useContext } from "react";
 import ReactPlayer from "react-player";
 import { AppearanceContext } from "../../contexts/appearance";
-// import { PlayerContext } from "../../contexts/player";
-// import { AppearanceContext } from "../../contexts/appearance";
+import { getRandomIndex } from "../../utils/get-random-index";
 
 const onReturnScreenDimensions = (dimensions) => {
   if (dimensions === "wide") {
@@ -14,18 +12,25 @@ const onReturnScreenDimensions = (dimensions) => {
   }
 };
 
-const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay, loop }) => {
+const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay, loop, shuffle }) => {
   const { dimensions } = useContext(AppearanceContext);
 
   const afterCurrentSongEnds = () => {
     if (currentCollection && currentCollection.length > 1) {
-      const prevIndex = currentSong.index + 1;
-      const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
-      if (nextIndex === 0 && loop === "none") {
-        dispatchPlay({ type: "PLAY_PAUSE" });
+      if (!shuffle) {
+        const prevIndex = currentSong.index + 1;
+        const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
+        if (nextIndex === 0 && loop === "none") {
+          dispatchPlay({ type: "PLAY_PAUSE" });
+          return;
+        }
+        dispatchPlay({ type: "SET_CURRENT_SONG", payload: currentCollection[nextIndex] });
         return;
       }
-      dispatchPlay({ type: "SET_CURRENT_SONG", payload: currentCollection[nextIndex] });
+      if (shuffle) {
+        const randomIndex = getRandomIndex(currentCollection.length);
+        dispatchPlay({ type: "SET_CURRENT_SONG", payload: currentCollection[randomIndex] });
+      }
     }
   };
 

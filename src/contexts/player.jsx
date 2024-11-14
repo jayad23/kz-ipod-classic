@@ -10,7 +10,8 @@ const initialState = {
   currentSong: null,
   duration: 0,
   loadedProgress: 0,
-  loop: "none", //"none" | "all" | "one"
+  loop: "none", //"none" | "all" | "one",
+  shuffle: false,
 };
 
 const PlayerContext = createContext(initialState);
@@ -58,6 +59,12 @@ const playerReducer = (state, action) => {
       return {
         ...state,
         loop: action.payload,
+      };
+
+    case "SET_SHUFFLE":
+      return {
+        ...state,
+        shuffle: !state.shuffle,
       };
 
     default:
