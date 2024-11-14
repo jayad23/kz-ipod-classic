@@ -11,7 +11,7 @@ const CoverFlow = () => {
   const { albums, dispatchPlay } = useContext(PlayerContext);
 
   const [direction, setDirection] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(Number(localStorage.getItem("lastCoverIndex")));
   const [itemSelected, setItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
@@ -60,6 +60,7 @@ const CoverFlow = () => {
         payload: selected_song,
       });
       localStorage.setItem("lastCoverIndex", currentIndex);
+      localStorage.setItem("lastSelectedSong", currentItemSelectedIndex);
       navigate("/now-playing");
       return;
     }
@@ -71,16 +72,19 @@ const CoverFlow = () => {
       setCurrentItemSelectedIndex(0);
       return;
     }
+    localStorage.removeItem("lastCoverIndex");
     navigate(-1);
   };
 
   useEffect(() => {
     const lastCoverIndex = localStorage.getItem("lastCoverIndex");
-    if (lastCoverIndex) {
-      setCurrentIndex(+lastCoverIndex);
+    const lastSelectedSong = localStorage.getItem("lastSelectedSong");
+    if (lastCoverIndex && lastSelectedSong) {
+      setCurrentIndex(Number(lastCoverIndex));
+      setCurrentItemSelectedIndex(Number(lastSelectedSong));
       handleCenterButton();
     }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -37,9 +37,9 @@ const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay 
     dispatchPlay({ type: "SET_LOADED_PROGRESS", payload: args.playedSeconds });
   };
 
-  const onCapturePlay = (args) => {
-    console.log("onCapturePlay", args);
-  };
+  // const onCapturePlay = (args) => {
+  //   console.log("onCapturePlay", args);
+  // };
 
   return (
     <div className={classnames(onReturnScreenDimensions(dimensions.size), "hidden")}>
@@ -48,7 +48,7 @@ const PlayerScreen = ({ isPlaying, currentSong, currentCollection, dispatchPlay 
         width="0%"
         height="0%"
         playing={isPlaying}
-        onPlay={onCapturePlay}
+        //onPlay={onCapturePlay}
         className="react-player"
         url={currentSong?.videoUrl}
         onEnded={afterCurrentSongEnds}
