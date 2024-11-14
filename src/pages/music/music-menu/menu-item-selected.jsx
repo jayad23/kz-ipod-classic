@@ -9,7 +9,7 @@ import MenuScreen from "../../../components/screen/with-menu/menu-screen";
 const MusicMenu = () => {
   const navigate = useNavigate();
   const { route_id } = useParams();
-  const { albums } = useContext(PlayerContext);
+  const { albums, dispatchPlay } = useContext(PlayerContext);
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
@@ -34,6 +34,27 @@ const MusicMenu = () => {
       if (title === "playlists") {
         navigate(`/music/playlists/playlist-selected/${item_selected.id}`);
         return;
+      }
+      if (title === "artists") {
+        const collection_of_songs = albums.map((album) => album.songs).flat();
+        const songs = collection_of_songs.filter((song) => song.artist.toLowerCase() === item_selected.artist.toLowerCase());
+        const payload = {
+          ...item_selected,
+          songs: songs.map((song, index) => ({ ...song, index }))
+        };
+        navigate(`/music/artists/artist-selected/${item_selected.id}`, { state: { payload } });
+        return;
+      }
+      if (title === "songs") {
+        dispatchPlay({
+          type: "SET_CURRENT_COLLECTION",
+          payload: menuItemSelected.values.map((song, index) => ({ ...song, index })),
+        });
+        dispatchPlay({
+          type: "SET_CURRENT_SONG",
+          payload: { ...item_selected, index: currentItemSelectedIndex },
+        });
+        navigate("/now-playing");
       }
     }
   };

@@ -55,7 +55,7 @@ const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
                 style={{ color: index === currentIndex ? "white" : "" }}
                 className={classnames("text-[0.8rem] text-slate-800")}
               >
-                {item?.artist ? item?.artist : item?.author ? `Created by ${item.author}` : ""}
+                {textEllipsis(item?.artist ? item?.artist : item?.author ? `Created by ${item.author}` : "", 38)}
               </div>
             </div>
           </div>
