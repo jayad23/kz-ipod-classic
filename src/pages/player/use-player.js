@@ -1,32 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import { onFetcher } from "../../api/fetcher";
-import { useQuery } from "@tanstack/react-query";
-import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PlayerContext } from "../../contexts/player";
-
-const componentMounts = true;
+import { getRandomIndex } from "../../utils/get-random-index";
 export const usePlayer = () => {
-  const { dispatchPlay, currentSong, currentCollection } =
+  const { dispatchPlay, currentSong, currentCollection, statePlay } =
     useContext(PlayerContext);
-  const { id } = useParams();
-  const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery({
-    queryKey: [`playlist-${id}`],
-    queryFn: async () => onFetcher(`/music/playlists/${id}`),
-  });
+  const navigate = useNavigate();
 
   const [menuItemSelected, setMenuItemSelected] = useState(null);
   const [currentItemSelectedIndex, setCurrentItemSelectedIndex] = useState(0);
 
   const handleButtonMenu = () => {
-    if (menuItemSelected) {
-      setMenuItemSelected(null);
-      setCurrentItemSelectedIndex(0);
-      navigate(-1);
-      return;
-    }
-    onShowPlaylistModal();
+    navigate(-1);
   };
 
   const handleCenterButton = () => {
@@ -62,16 +48,25 @@ export const usePlayer = () => {
     }
 
     if (currentCollection && currentCollection.length > 1) {
-      const prevIndex = currentSong.index + 1;
-      const nextIndex = prevIndex === currentCollection.length ? 0 : prevIndex;
-      if (nextIndex === 0) {
-        dispatchPlay({ type: "PLAY_PAUSE" });
-        return;
+      if (statePlay.shuffle) {
+        const nextIndex = getRandomIndex(currentCollection.length);
+        dispatchPlay({
+          type: "SET_CURRENT_SONG",
+          payload: currentCollection[nextIndex],
+        });
+      } else {
+        const prevIndex = currentSong.index + 1;
+        const nextIndex =
+          prevIndex === currentCollection.length ? 0 : prevIndex;
+        if (nextIndex === 0 && statePlay.loop === "none") {
+          dispatchPlay({ type: "PLAY_PAUSE" });
+          return;
+        }
+        dispatchPlay({
+          type: "SET_CURRENT_SONG",
+          payload: currentCollection[nextIndex],
+        });
       }
-      dispatchPlay({
-        type: "SET_CURRENT_SONG",
-        payload: currentCollection[nextIndex],
-      });
     }
   };
 
@@ -95,35 +90,14 @@ export const usePlayer = () => {
     }
   };
 
-  useEffect(() => {
-    if (data && componentMounts) {
-      dispatchPlay({
-        type: "SET_CURRENT_COLLECTION",
-        payload: data.data.songs,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  const onShowPlaylistModal = () => {
-    const payload = {
-      title: currentSong.playlistName,
-      values: currentCollection,
-    };
-
-    setCurrentItemSelectedIndex(currentSong.index);
-    setMenuItemSelected(payload);
-  };
-
   return {
-    data,
-    isLoading,
     currentSong,
     handleButtonMenu,
     menuItemSelected,
     handlePlayButton,
     handleNextButton,
     handlePrevButton,
+    currentCollection,
     handleCenterButton,
     currentItemSelectedIndex,
   };

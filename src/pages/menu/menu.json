@@ -33,7 +33,7 @@
     {
       "id": 6,
       "title": "Now playing",
-      "route": "/:id/now-playing"
+      "route": "/now-playing"
     },
     {
       "id": 7,

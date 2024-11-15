@@ -58,10 +58,9 @@ function ImageFlow({ currentIndex, albums, direction }) {
               <img
                 src={album.cover}
                 alt={album.title}
-                className="w-48 h-48 rounded-lg shadow-xl object-cover"
+                className="w-48 h-48 shadow-xl object-cover"
                 style={{
                   filter: `brightness(${isCenter ? 100 : 70}%)`,
-                  //WebkitBoxReflect: "below 1px linear-gradient(transparent, transparent, #0002)"
                   WebkitBoxReflect: "below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))"
                 }}
               />

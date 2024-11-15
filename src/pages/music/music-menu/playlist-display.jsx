@@ -6,7 +6,6 @@ import InformationBar from "../../../components/information-bar/information-bar"
 
 const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
   const itemRef = useRef([]);
-
   useEffect(() => {
     if (itemRef.current[currentIndex]) {
       itemRef.current[currentIndex].scrollIntoView({
@@ -56,7 +55,7 @@ const PlaylistDisplay = ({ itemSelected, currentIndex }) => {
                 style={{ color: index === currentIndex ? "white" : "" }}
                 className={classnames("text-[0.8rem] text-slate-800")}
               >
-                {item?.author || item?.artist}
+                {textEllipsis(item?.artist ? item?.artist : item?.author ? `Created by ${item.author}` : "", 38)}
               </div>
             </div>
           </div>

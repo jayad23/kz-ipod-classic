@@ -1,9 +1,10 @@
 import "./player.css";
 import classnames from "classnames";
 import SmartImageDisplay from "./smart-image-displayer";
+import { textEllipsis } from "../../utils/text-ellipsis";
 
 
-const SongInformation = ({ songName, artist, img, playlistName, index, total }) => {
+const CurrentSongPlaying = ({ songName, artist, img, playlistName, index, total }) => {
   return (
     <div
       className={classnames("absolute top-[17px] w-full p-3 flex justify-center items-center")}
@@ -13,8 +14,9 @@ const SongInformation = ({ songName, artist, img, playlistName, index, total }) 
         currentSongImage={img}
         currentSongName={songName}
       />
-      <div className="w-1/2 ml-2 pt-7 flex flex-col overflow-hidden">
+      <div className="w-1/2 ml-2 pt-2 flex flex-col overflow-hidden">
         <span
+          style={{ fontSize: "1.3rem", whiteSpace: "nowrap", overflowWrap: "normal" }}
           className={
             classnames("text-slate-600 text-md font-bold", "span-title", songName.length > 12 ? "song_name" : "")
           }
@@ -26,14 +28,14 @@ const SongInformation = ({ songName, artist, img, playlistName, index, total }) 
             classnames("text-slate-600 text-[12px] font-semibold", "span-title")
           }
         >
-          {artist}
+          {textEllipsis(artist, 17)}
         </span>
         <span
           className={
             classnames("text-slate-600 text-[10px] mt-1/2 font-semibold", "span-title")
           }
         >
-          {playlistName}
+          {textEllipsis(playlistName, 17)}
         </span>
         <span
           className={
@@ -55,4 +57,4 @@ const SongInformation = ({ songName, artist, img, playlistName, index, total }) 
   );
 };
 
-export default SongInformation;
+export default CurrentSongPlaying;

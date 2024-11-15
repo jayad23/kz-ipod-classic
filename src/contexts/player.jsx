@@ -8,7 +8,10 @@ const initialState = {
   albums: [],
   currentCollection: [],
   currentSong: null,
-  duration: 0
+  duration: 0,
+  loadedProgress: 0,
+  loop: "none", //"none" | "all" | "one",
+  shuffle: false,
 };
 
 const PlayerContext = createContext(initialState);
@@ -31,22 +34,37 @@ const playerReducer = (state, action) => {
       return {
         ...state,
         currentCollection: action.payload,
-        currentSong: action.payload[0],
-        duration: 0,
-        isPlaying: true
       };
 
     case "SET_CURRENT_SONG":
       return {
         ...state,
+        isPlaying: true,
         currentSong: action.payload,
-        duration: 0
       };
 
     case "SET_DURATION":
       return {
         ...state,
         duration: action.payload,
+      };
+
+    case "SET_LOADED_PROGRESS":
+      return {
+        ...state,
+        loadedProgress: action.payload,
+      };
+
+    case "SET_LOOP":
+      return {
+        ...state,
+        loop: action.payload,
+      };
+
+    case "SET_SHUFFLE":
+      return {
+        ...state,
+        shuffle: !state.shuffle,
       };
 
     default:
@@ -57,7 +75,6 @@ const playerReducer = (state, action) => {
 const PlayerProvider = ({ children }) => {
   const [statePlay, dispatchPlay] = useReducer(playerReducer, initialState);
   const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
-  //const data = null;
 
   useEffect(() => {
     if (data) {

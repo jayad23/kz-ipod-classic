@@ -26,6 +26,7 @@ const Menu = () => {
 
   const handleCenterButton = () => {
     const menu_item_selected = menu_data.menu_options[currentIndex];
+
     if (menu_item_selected) {
       navigate(menu_item_selected.route);
     }
