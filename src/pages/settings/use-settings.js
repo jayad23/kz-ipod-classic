@@ -189,6 +189,7 @@ export const useSettings = () => {
   };
 
   return {
+    isLoading,
     settings_options,
     itemSelected,
     menuCurrentIndex,

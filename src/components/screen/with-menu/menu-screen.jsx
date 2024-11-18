@@ -1,10 +1,11 @@
-import { motion, useMotionValue } from 'framer-motion';
-import BlackBorder from "../black-border";
-import classnames from "classnames";
 import { useContext } from 'react';
+import classnames from "classnames";
+import iOSLoading from "../../../assets/ios_loading.gif";
+import BlackBorder from "../black-border";
+import { motion, useMotionValue } from 'framer-motion';
 import { AppearanceContext } from '../../../contexts/appearance';
 
-const MenuScreen = ({ children, bg = "bg-white" }) => {
+const MenuScreen = ({ children, bg = "bg-white", loading }) => {
   const x = useMotionValue(0);
 
   const { dimensions } = useContext(AppearanceContext);
@@ -18,7 +19,7 @@ const MenuScreen = ({ children, bg = "bg-white" }) => {
           height: dimensions.size === "small" ? "250px" : "300px",
         }}
       >
-        {children}
+        {loading ? <img src={iOSLoading} alt="loading" className="w-8 h-8" /> : children}
       </motion.div>
     </BlackBorder>
   );

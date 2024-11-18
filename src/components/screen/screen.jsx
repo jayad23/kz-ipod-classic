@@ -1,10 +1,11 @@
-import { motion, useMotionValue } from 'framer-motion';
-import InformationBar from "../information-bar/information-bar";
-import BlackBorder from "./black-border";
 import { useContext } from 'react';
+import BlackBorder from "./black-border";
+import { motion, useMotionValue } from 'framer-motion';
+import iOSLoading from "../../assets/ios_loading.gif";
 import { AppearanceContext } from '../../contexts/appearance';
+import InformationBar from "../information-bar/information-bar";
 
-const Screen = ({ children, currentScreen }) => {
+const Screen = ({ children, currentScreen, loading }) => {
   const x = useMotionValue(0);
   const { dimensions } = useContext(AppearanceContext);
   return (
@@ -17,7 +18,7 @@ const Screen = ({ children, currentScreen }) => {
         }}
       >
         <InformationBar currentScreen={currentScreen} />
-        {children}
+        {loading ? <img src={iOSLoading} alt="loading" className="w-8 h-8" /> : children}
       </motion.div>
     </BlackBorder>
   );

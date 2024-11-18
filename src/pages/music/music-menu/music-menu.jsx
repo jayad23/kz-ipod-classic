@@ -2,9 +2,10 @@
 import { Fragment, useState, useContext, useEffect } from "react";
 import menu_data from "./menu.json";
 import classnames from "classnames";
-import { useLocation, useNavigate } from "react-router-dom";
 import Wheel from "../../../components/wheel/wheel";
+import iOSLoading from "../../../assets/ios_loading.gif";
 import { PlayerContext } from "../../../contexts/player";
+import { useLocation, useNavigate } from "react-router-dom";
 import OptionsMapper from "../../../components/options.mapper";
 import { getOnlyImages } from "../../../utils/get-only-images";
 import MenuScreen from "../../../components/screen/with-menu/menu-screen";
@@ -72,6 +73,9 @@ const MusicMenu = () => {
         </div>
         <div id="right" className={classnames("bg-slate-900 w-[70%] h-full absolute z-10 right-0")}>
           <RandomFloatingImage images={getOnlyImages(albums)} />
+        </div>
+        <div className="w-full h-full flex justify-center items-center">
+          <img src={iOSLoading} alt="loading" className="w-8 h-8" />
         </div>
       </MenuScreen>
       <Wheel

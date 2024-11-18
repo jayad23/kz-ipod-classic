@@ -16,7 +16,12 @@ function ImageFlow({ currentIndex, albums, direction }) {
   };
 
   return (
-    <div className="cover-container w-full h-full flex items-center justify-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="cover-container w-full h-full flex items-center justify-center"
+    >
       <AnimatePresence initial={false} custom={direction}>
         {getVisibleAlbums().map((album) => {
           const isCenter = album.virtualIndex === 0;
@@ -64,12 +69,12 @@ function ImageFlow({ currentIndex, albums, direction }) {
                   WebkitBoxReflect: "below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))"
                 }}
               />
-              <AlbumTitle name={albums[album?.index - 1]?.artist || ""} />
+              <AlbumTitle name={albums[album?.index - 1]?.name || ""} />
             </motion.div>
           );
         })}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

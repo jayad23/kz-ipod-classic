@@ -74,14 +74,16 @@ const playerReducer = (state, action) => {
 
 const PlayerProvider = ({ children }) => {
   const [statePlay, dispatchPlay] = useReducer(playerReducer, initialState);
-  const { data } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
+  const { data: playlists_collection } = useQuery({ queryKey: ['playlist'], queryFn: async () => onFetcher("/music/playlists") });
+  // const { data: videos_collection } = useQuery({ queryKey: ['videos'], queryFn: async () => onFetcher("/videos") });
+  // console.log("videos_collection", videos_collection);
 
   useEffect(() => {
-    if (data) {
-      dispatchPlay({ type: "SET_ALBUMS", payload: data.data });
+    if (playlists_collection) {
+      dispatchPlay({ type: "SET_ALBUMS", payload: playlists_collection.data });
     }
 
-  }, [data]);
+  }, [playlists_collection]);
 
   const payload = {
     statePlay,

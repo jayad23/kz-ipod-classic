@@ -37,7 +37,7 @@ const Menu = () => {
 
   return (
     <Fragment>
-      <MenuScreen>
+      <MenuScreen loading={images.length === 0}>
         <div id="left" className={classnames("w-[45%] h-full flex flex-col absolute z-20 left-0")}>
           <InformationBar currentScreen="iPod" dark_line />
           <OptionsMapper options={menu_data.menu_options} currentIndex={currentIndex} />

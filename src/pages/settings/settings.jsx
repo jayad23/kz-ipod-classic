@@ -8,11 +8,12 @@ import ConfirmationModal from "./confirmation-modal";
 import OptionsMapper from "../../components/options.mapper";
 import MenuScreen from "../../components/screen/with-menu/menu-screen";
 import RandomFloatingImage from "../../components/random-floating-image";
-import InformationBar from "../../components/information-bar/information-bar";
 import ItemSelected from "../../components/item-selected/item-selected";
+import InformationBar from "../../components/information-bar/information-bar";
 
 const Settings = () => {
   const {
+    isLoading,
     confirm_options,
     settings_options,
     itemSelected,
@@ -30,7 +31,7 @@ const Settings = () => {
 
   return (
     <Fragment>
-      <MenuScreen>
+      <MenuScreen loading={isLoading}>
         {itemSelected && (<ItemSelected itemSelected={itemSelected} currentIndex={currentItemSelectedIndex} />)}
         {confirmExit && (
           <ConfirmationModal

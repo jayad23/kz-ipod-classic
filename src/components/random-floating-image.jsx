@@ -1,16 +1,15 @@
-
-//import { albums } from "../assets/cover.js";
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getRandomIndex } from '../utils/get-random-index';
 
-//const images = albums.map((album) => album.cover);
 
 const RandomFloatingImage = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Cambia al siguiente índice
+      const random = getRandomIndex(images.length);
+      setImageIndex((prevIndex) => (prevIndex + random) % images.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [images]);
